@@ -18,8 +18,6 @@
     "env-cmd": "^10.1.0",
     "flagsmith": "^3.3.2",
     "next": "^12.2.2",
-    "next-i18next": "^11.0.0",
-    "nextjs-progressbar": "0.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sinon": "^14.0.0",
