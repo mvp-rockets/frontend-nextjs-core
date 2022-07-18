@@ -16,7 +16,7 @@
     "test:watch": "jest --watch",
     "test": "NODE_ENV=test jest"
   },
-  "author": "Yashjeet Luthar <yash@napses.com>",
+  "author": "Yashjeet Luthra <yash@napses.com>, Priyansh Jain <priyansh.jain@napses.com>",
   "license": "Napses",
   "dependencies": {
     "axios": "^0.27.2",
