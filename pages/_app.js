@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps, flagsmithState }) {
 
 MyApp.getInitialProps = async () => {
   await flagsmith.init({
-   environmentID:process.env.FLAGSMITH_KEY,
+   environmentID:process.env.NEXT_PUBLIC_FLAGSMITH_KEY,
   });
   return { flagsmithState: flagsmith.getState() };
  };
