@@ -6,11 +6,11 @@ export default function Home() {
   const showHeader = flags.show_header.enabled;
   
   return (
-    <div>
+    <div className='text-center'>
       <main>
-      {showHeader ? (<h1>
+      {showHeader ? (  <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>): (<h1 >
+        </h1>): (<h1 className="text-3xl font-bold underline">
           Welcome to <a href="https://nextjs.org"> Not Next.js!</a>
         </h1>)}
         
