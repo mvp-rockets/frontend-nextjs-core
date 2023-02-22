@@ -8,8 +8,8 @@ const Template = (args) => <AdminSidebar {...args} />;
 export const adminSidebar = Template.bind({});
 
 adminSidebar.args = {
-    linkColor: "text-white",
-    activeLinkColor: "",
+    linkColor: "",
+    activeLinkColor: "bg-white text-black rounded-md",
     linkHoverBgColor: "bg-primary-100",
     linkHoverColor: "text-primary-900",
     menuItems: [

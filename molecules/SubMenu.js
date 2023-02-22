@@ -19,7 +19,7 @@ const SubMenuList = ({ item, type, subMenuClass, activeLinkColor, linkColor, lin
             <div className="relative">
                 <Link href={url}>
                     <div
-                        className={`flex px-4 hover:${linkHoverColor} hover:${linkHoverBgColor} items-center ${
+                        className={`flex px-4 ${isActive ? activeLinkColor : linkColor} rounded-md hover:${linkHoverColor} hover:${linkHoverBgColor} items-center ${
                             iconPosition === "right" ? "flex-row-reverse justify-between" : "flex-row"
                         } ${item.submenu && "pr-8"} ${subTitle ? "py-2" : "py-2.5"} ${isActive && "border-l-2 border-primary-900 md:border-0"}`}
                         onClick={onClick}
@@ -30,16 +30,16 @@ const SubMenuList = ({ item, type, subMenuClass, activeLinkColor, linkColor, lin
                             </div>
                         )}
 
-                        <div className={`pr-3 ${iconSrc && "min-w-[100px]"}`}>
-                            <div className={`text-sm ${isActive ? activeLinkColor : linkColor}`}>{title}</div>
-                            <div className={`text-xs ${isActive ? activeLinkColor : linkColor}`}>{subTitle}</div>
+                        <div className={`pr-3  ${iconSrc && "min-w-[100px]"}`}>
+                            <div className={`text-sm `}>{title}</div>
+                            <div className={`text-xs `}>{subTitle}</div>
                         </div>
                     </div>
                 </Link>
                 {item.submenu && item.submenu.length > 0 && (
                     <span className="absolute top-2/4 -translate-y-1/2 right-4">
                         {" "}
-                        <Image src={`/images/icons/angle-${isActive ? "up-b" : "down"}.svg`} width="11" height="6" alt="" />
+                        <Image src={`/images/icons/${isActive ? "angel-up-blue" : "angel-down-white"}.svg`} width="11" height="6" alt="" />
                     </span>
                 )}
             </div>
