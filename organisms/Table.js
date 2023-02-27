@@ -3,20 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { usePagination, useSortBy, useTable } from "react-table";
 
-const Table = ({ tableData }) => {
-    const columns = React.useMemo(
-        () => [
-            {
-                Header: "Full Name",
-                accessor: "Name",
-            },
-            {
-                Header: "Sector Focus",
-                accessor: "aa",
-            },
-        ],
-        []
-    );
+const Table = ({ tableData, columns }) => {
     const {
         getTableProps,
         getTableBodyProps,
@@ -41,13 +28,13 @@ const Table = ({ tableData }) => {
     );
     return (
         <div>
-            <table className="w-full" {...getTableProps()}>
-                <thead className="bg-neutral-100 text-left text-xs md:text-sm uppercase text-neutral-400">
+            <table className="rounded-lg border border-neutral-200 w-full" {...getTableProps()}>
+                <thead className="bg-neutral-50  text-left text-xs md:text-sm text-neutral-400">
                     {headerGroups.map((headerGroup, i) => (
-                        <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                        <tr className="border border-neutral-200" key={i} {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column, i) => (
                                 <th
-                                    className="px-4 py-4 md:px-6 md:py-5 font-medium w-fit truncate min-w-[200px] md:w-2/12 md:max-w-2/12 md:min-w-[16%]"
+                                    className="px-4 py-4 text-neutral-800  md:px-6 md:py-5 font-medium w-fit truncate min-w-[200px] md:w-2/12 md:max-w-2/12 md:min-w-[16%]"
                                     key={i}
                                     {...column.getHeaderProps(column.getSortByToggleProps())}
                                 >
@@ -72,7 +59,7 @@ const Table = ({ tableData }) => {
                     {page.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <tr className="bg-white rounded-md whitespace-pre-line" key={i} {...row.getRowProps()}>
+                            <tr className="bg-white border border-neutral-200  rounded-md whitespace-pre-line" key={i} {...row.getRowProps()}>
                                 {row.cells.map((cell, i) => (
                                     <td key={i} className="px-4 py-4 md:px-6 md:py-5 text-xs md:text-sm" {...cell.getCellProps()}>
                                         {cell.render("Cell")}
