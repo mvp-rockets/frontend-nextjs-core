@@ -1,8 +1,8 @@
 import AdminSidebar from "../../organisms/AdminSidebar";
 import AdminTopBar from "../../organisms/AdminTopBar";
-import ViewLecture from "../../organisms/lectures/ViewLecture";
+import ListLecture from "../../organisms/lectures/ListLecture";
 
-const ViewLectureTemplate = ({ menuItems, linkColor, linkHoverColor, activeLinkColor, linkHoverBgColor, data }) => {
+const ListLectureTemplate = ({ menuItems, linkColor, linkHoverColor, activeLinkColor, linkHoverBgColor, data, columns, tableData }) => {
     return (
         <>
             <div className="grid grid-cols-6">
@@ -19,11 +19,11 @@ const ViewLectureTemplate = ({ menuItems, linkColor, linkHoverColor, activeLinkC
                 </div>
                 <div className="col-span-5">
                     <AdminTopBar breadcrumb={data}></AdminTopBar>
-                    <ViewLecture></ViewLecture>
+                    <ListLecture columns={columns} tableData={tableData}></ListLecture>
                 </div>
             </div>
         </>
     );
 };
 
-export default ViewLectureTemplate;
+export default ListLectureTemplate;
