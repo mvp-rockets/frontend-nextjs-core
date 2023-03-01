@@ -21,6 +21,7 @@ const Card = ({
   buttonLabel = "",
   iconSrc = "",
   iconAlt = "",
+  imgSmall,
   onClick,
 }) => {
 
@@ -28,20 +29,22 @@ const Card = ({
     default: "default",
     cardWithIcon: "cardWithIcon",
     cardWithImage: "cardWithImage",
+    cardWithSmallImage: "cardWithSmallImage",
     detailCard: "detailCard"
   };
 
   return (
     <a
       variant={cardType[variant]}
-      className={`${backgroundColor} ${borderRadius} ${cardPadding} ${className} w-fit min-w-[360px] shadow-card flex flex-col overflow-hidden`}
+      className={`${backgroundColor} ${borderRadius} ${cardPadding} ${className} ${imgSmall ? "flex-row space-x-4 items-center" : "flex-col"} w-fit min-w-[360px] shadow-card flex overflow-hidden`}
       onClick={onClick}>
 
-        {imgSrc && <div className='pb-6'>
+        {imgSrc && <div className={` ${imgSmall ? '' : 'pb-6'} `}>
           <img className={`w-full h-auto ${imgClass}`}
                src={imgSrc} 
                alt={imgAlt} />
-        </div> }
+        </div> 
+        }
 
         <div className={`${iconSrc && 'flex items-center space-x-4' }`}>
             {iconSrc &&  <Icon src={iconSrc} alt={iconAlt}/> }
@@ -68,4 +71,5 @@ Card.propTypes = {
   HeadingClass: PropTypes.string,
   SecondaryTextClass: PropTypes.string,
   buttonLabel: PropTypes.string,
+  imgSmall: PropTypes.string,
 };

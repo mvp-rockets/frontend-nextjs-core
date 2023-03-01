@@ -4,18 +4,7 @@ import Text from "../atoms/Text";
 import Image from "next/image";
 import Icon from "../atoms/Icon";
 
-const FileUpload = ({
-    isError = false,
-    variant = "default",
-    UploadLabel,
-    UploadSubText,
-    iconSrc,
-    iconAlt = "",
-    UploadLabelStyle,
-    UploadSubTextStyle,
-    className,
-    Width = "w-[395px]",
-}) => {
+const FileUpload = ({ isError = false, variant = "default", UploadLabel, UploadSubText, iconSrc, iconAlt = "", UploadLabelStyle, UploadSubTextStyle, className }) => {
     const [file, setFile] = useState([]);
 
     const uploadSingleFile = (e) => {
@@ -34,7 +23,7 @@ const FileUpload = ({
     };
 
     return (
-        <div className="flex flex-wrap" variant={fileType[variant]}>
+        <div className="flex flex-wrap -mx-2" variant={fileType[variant]}>
             {fileType[variant] == "default" && (
                 <>
                     {file.length > 0 &&
@@ -74,7 +63,7 @@ const FileUpload = ({
             )}
             {fileType[variant] == "uploadDrag" && (
                 <div className={` ${className}`}>
-                    <div className={`relative ${Width} h-[168px] flex flex-col justify-center text-center ${isError ? "border-error-100" : "border-neutral-300"}`}>
+                    <div className={`relative w-[395px] h-[168px] flex flex-col justify-center text-center ${isError ? "border-error-100" : "border-neutral-300"}`}>
                         <input
                             type="file"
                             // disabled={file.length === 5}

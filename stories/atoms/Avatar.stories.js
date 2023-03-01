@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "../../atoms/Avatar";
 
 export default {
-  title: "Atoms/Avatars",
+  title: "Atoms/Avatar",
   component: Avatar,
   argTypes: {
     size: {
@@ -21,15 +21,46 @@ export default {
 };
 
 const imgUrl = "/images/icons/profile.jpg";
+const iconUrl = "/images/icons/profile-img.svg";
 
 const Template = (args) => <Avatar {...args} />;
 
-export const Avatars = Template.bind({});
+export const avatar = Template.bind({});
 
-Avatars.args = {
-  className: "",
-  imgSrc: imgUrl,
-  title: "H",
-  badgeTxt: 15,
-  badge: "badge",
+avatar.args = {
+    className: "",
+    imgSrc: imgUrl,
+    badgeTxt: 15,
+    badge: "badge",
+};
+
+export const iconAvatars = Template.bind({});
+iconAvatars.args = {
+    className: "",
+    imgSrc: iconUrl,
+    badgeTxt: 16,
+    badge: "badge",
+    bgColor: "bg-gray-300",
+    iconAvatar: true
+};
+
+export const textAvatars = Template.bind({});
+textAvatars.args = {
+    className: "",
+    title: "H",
+    badgeTxt: 15,
+    badge: "badge",
+    bgColor: "bg-primary-300",
+    titleColor: "text-primary-900"
+};
+
+export const textAvatarsBg = Template.bind({});
+
+textAvatarsBg.args = {
+    className: "",
+    title: "H",
+    badgeTxt: 15,
+    badge: "badge",
+    bgColor: "bg-success-100",
+    titleColor: "text-white"
 };

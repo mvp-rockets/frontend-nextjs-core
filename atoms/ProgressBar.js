@@ -41,7 +41,7 @@ const ProgressBar = ({
           style={{ width: value }}
           className={classnames(
             [className],
-            "w-full flex items-center",
+            "w-full flex items-center", className,
             activeBackground,
             {
               "rounded-full": style === progressBarStyle.rounded,

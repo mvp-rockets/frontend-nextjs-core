@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 const UploadImagePreview = ({
-    imgSrc = "/images/demo-img.jpg",
-    imgWidth = "80",
-    imgHeight = "80",
-    imgAlt = "demo",
+    imgSrc,
+    imgWidth,
+    imgHeight,
+    imgAlt,
 
 }) => {
+    const myLoader = ({ src }) => src;
     return (
-        <div className='relative w-fit mt-6 mb-3'>
+        <div className='relative w-fit'>
             <Image
+                loader={myLoader}
                 className='rounded'
                 src={imgSrc}
                 width={imgWidth}

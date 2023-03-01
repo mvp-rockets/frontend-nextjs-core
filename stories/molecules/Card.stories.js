@@ -43,6 +43,22 @@ WithImage.args = {
   imgAlt : "Image Description",
 };
 
+export const cardWithSmallImage = Template.bind({});
+cardWithSmallImage.args = {
+  backgroundColor: "bg-white",
+  cardPadding:"p-4",
+  borderRadius: "rounded-md",
+  HeadingText : "Card title",
+  SecondaryText : "This card having Image",
+  variant : 'cardWithSmallImage',
+  imgSmall: true,
+  imgSrc : "/images/card.png",
+  imgAlt : "Image Description",
+  imgClass: 'w-28 rounded-lg '
+};
+
+
+
 export const WithButton = Template.bind({});
 WithButton.args = {
   backgroundColor: "bg-white",

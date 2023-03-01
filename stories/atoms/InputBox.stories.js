@@ -23,6 +23,7 @@ InputBoxes.args = {
     name: "name",
     type: "text",
     placeholder: "Enter Your Name",
+    errorClass: 'This is error message',
     disabled: false,
     autofocus: false,
     readonly: false,

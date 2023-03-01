@@ -35,20 +35,6 @@ const SkeletonTypes = {
         </div>
     </div>,
 
-    drSummery: ({ index }) => <div key={index} type='regular' className='p-4 pb-5 flex flex-col md:flex-row gap-5 relative'>
-        <Skeleton className='w-full h-full' containerClassName='w-full h-full rounded-lg w-full h-40 md:h-41 md:w-62.5' />
-        <div className='flex-grow'>
-            <Skeleton width={200} height={24} className='mb-6 md:mt-3' />
-            <Skeleton width={100} height={20} className='' />
-            <Skeleton width={150} height={20} className='' />
-            <Skeleton width={200} height={15} className='mt-8' />
-        </div>
-
-        <div className='md:absolute md:right-4 md:top-4 max-w-50 w-full px-1 mx-auto'>
-            <Skeleton containerClassName='w-full' height={48} className='rounded-2xl' style={{ borderRadius: 50 }} />
-        </div>
-    </div>,
-
     clinicBlogSummery: ({ index }) => <div key={index} type='regularMob' className='p-4 pb-5 flex flex-col md:flex-row gap-6 relative'>
         <Skeleton className='w-full h-full shrink-0' containerClassName='w-full h-full rounded-lg w-full h-40 md:h-62.5 md:w-82.5' />
         <div className='flex-grow'>
@@ -104,7 +90,7 @@ const SkeletonTypes = {
                 <div className='mt-5 w-full'>
                     <Skeleton containerClassName='flex w-10/12' height={15} />
 
-                    <Skeleton count={2} width='100%' height={15} />
+                    <Skeleton count={2}  width='100%' height={15} />
                 </div>
                 <div className='mb-3.5 flex gap-3 items-center'>
                     <Skeleton containerClassName='shrike-0' width={40} height={40} style={{ borderRadius: '100%' }} />
@@ -261,6 +247,6 @@ SkeletonLoader.defaultProps = {
 SkeletonLoader.propTypes = {
     className: PropTypes.string,
     length: PropTypes.number,
-    type: PropTypes.oneOf(['medicineSummery', 'drSummery', 'clinicBlogSummery', 'YoutubeCard', 'feedCard', 'userShortSummery', 'singleRow', 'clinicDoctorSummery', 'learningCard', 'courseCard', 'videoTimeline', 'topicCard', 'similarDoctor', 'blogSummery',]),
+    type: PropTypes.oneOf(['medicineSummery', 'clinicBlogSummery', 'youtubeCard', 'feedCard', 'userShortSummery', 'singleRow', 'clinicDoctorSummery', 'learningCard', 'courseCard', 'videoTimeline', 'topicCard', 'similarDoctor', 'blogSummery',]),
 }
 export default SkeletonLoader

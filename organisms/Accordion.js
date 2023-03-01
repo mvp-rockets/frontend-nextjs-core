@@ -8,19 +8,40 @@ const AccordionList = ({ variant = "base", title, content }) => {
     base: "border-x-0 ",
     normal: "first:border-t",
   };
+
+  const [display, setDisplay] = useState("hidden");
+
+  const [opacity, setOpacity] = useState("opacity-0");
+
+  const toggleActive = () => {
+    if (display === "hidden") {
+      setDisplay("block");
+      setTimeout(() => setOpacity("opacity-100"), 100);
+    }
+
+    if (display === "block") {
+      setOpacity("opacity-0");
+      setTimeout(() => setDisplay("hidden"), 100);
+    }
+
+    setIsActive(!isActive);
+  };
+
   return (
     <div
       variant={variant}
-      className={`border border-neutral-300  ${accordionType[variant]} ${isActive ? "border-t-2 border-t-primary-900" : "border-t-0"
-        }`}
+      className={`border group border-neutral-300  ${accordionType[variant]} ${
+        isActive ? "border-t border-t-primary-900" : "border-t-0"
+      }`}
     >
       <div
         className="flex justify-between p-4 cursor-pointer"
-        onClick={() => setIsActive(!isActive)}
+        onClick={toggleActive}
       >
         <div
-          className={`text-lg text-neutral-900 pr-3 ${isActive && "font-medium"
-            }`}
+          className={`text-lg text-neutral-900 pr-3 ${
+            isActive && "font-medium"
+          }`}
         >
           {title}
         </div>
@@ -42,12 +63,11 @@ const AccordionList = ({ variant = "base", title, content }) => {
           )}
         </div>
       </div>
-      {isActive && (
-        <div
-          className="p-4 pt-2 text-neutral-700"
-          dangerouslySetInnerHTML={{ __html: content }}
-        ></div>
-      )}
+
+      <div
+        className={`p-4 pt-2 ${display} ${opacity} text-neutral-700 text-sm  transition-all duration-300 ease-in-out`}
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></div>
     </div>
   );
 };
