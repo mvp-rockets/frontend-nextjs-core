@@ -17,7 +17,7 @@ const Alert = ({ children, variant = "info", alertClass = "" }) => {
         info: "bg-info-100 text-white",
         error: "bg-error-100 text-white",
         success: "bg-success-100 text-white",
-        warning: "bg-warning-100 text-white",
+        warning: "bg-warning-100 text-black",
         infoLight: "bg-info-50 text-info-100",
         errorLight: "bg-error-50 text-error-100",
         successLight: "bg-success-50 text-success-100",

@@ -1,9 +1,9 @@
 import React from "react";
 
-import SkeletonQuiz from "../../atoms/SkeletonQuiz";
+import SkeletonQuiz from "../../atoms/Skeleton/SkeletonQuiz";
 
 export default {
-    title: "atoms/SkeletonQuiz",
+    title: "atoms/Skeleton/SkeletonQuiz",
     component: SkeletonQuiz,
 };
 

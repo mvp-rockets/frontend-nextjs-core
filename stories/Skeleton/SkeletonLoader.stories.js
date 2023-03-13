@@ -1,9 +1,10 @@
 import React from "react";
 
-import SkeletonLoader from "../../atoms/SkeletonLoader";
+import SkeletonLoader from "../../atoms/Skeleton/SkeletonLoader";
+
 
 export default {
-    title: "atoms/SkeletonLoader",
+    title: "atoms/Skeleton/SkeletonLoader",
     component: SkeletonLoader,
 };
 
@@ -15,20 +16,14 @@ Default.args = {
     length: 1,
 };
 
-export const DrSummery = Template.bind({});
-DrSummery.args = {
-    type: "drSummery",
-    length: 1,
-};
-
 export const ClinicBlogSummery = Template.bind({});
 ClinicBlogSummery.args = {
     type: "clinicBlogSummery",
     length: 1,
 };
 
-export const YoutubeCard = Template.bind({});
-YoutubeCard.args = {
+export const youtubeCard = Template.bind({});
+youtubeCard.args = {
     type: "youtubeCard",
     length: 1,
 };

@@ -1,16 +1,22 @@
 import PropTypes from "prop-types";
 import React from "react";
+
 const Avatar = ({
-  badge = "normal",
-  shape = "circle",
-  size = "large",
-  imgSrc = "/images/icons/profile-img.svg",
-  width = 64,
-  height = 64,
-  title,
-  onClick = () => { },
-  badgeTxt = "",
+    badge = "normal",
+    shape = "circle",
+    size = "large",
+    imgSrc = "/images/icons/profile-img.svg",
+    imgAlt = "icon",
+    imgWidth = 64,
+    imgHeight = 64,
+    title,
+    onClick = () => { },
+    iconAvatar = false,
+    badgeTxt = "",
+    bgColor,
+    titleColor = "text-primary-900"
 }) => {
+
   const badgeType = {
     normal: "hidden",
     badge: "px-2 py-0.5 -top-2 border-2 border-white",
@@ -25,11 +31,12 @@ const Avatar = ({
 
   const avatarSize = {
     normal: "",
-    small: "w-6 h6",
-    medium: "w-8 h-8",
-    large: "w-10 h-10",
-    extraLarge: "w-16 h-16",
+    small: "w-6 h-6 text-xs",
+    medium: "w-8 h-8 text-sm",
+    large: "w-10 h-10 text-base",
+    extraLarge: "w-16 h-16 text-xl",
   };
+
   return (
     <div
       badge={badge}
@@ -38,7 +45,7 @@ const Avatar = ({
       className={`relative ${avatarSize[size]}`}
     >
       <div
-        className={`flex justify-center items-center text-center bg-primary-300 overflow-hidden text-white text-xl ${avatarShape[shape]}`}
+        className={`flex justify-center items-center text-center overflow-hidden text-white h-full  ${bgColor}  ${avatarShape[shape]}`}
       >
         {badgeTxt ? (
           <div
@@ -52,16 +59,17 @@ const Avatar = ({
         ) : (
           ""
         )}
-        {imgSrc ? (
+        {title ? (<span className={`font-medium  ${titleColor}`}>{title}</span>
+        ) : (
           <img
             onClick={onClick}
             src={imgSrc}
-            width={width}
-            height={height}
-            className="w-full h-full object-cover"
+            width={imgWidth}
+            height={imgHeight}
+            className={`w-full h-full object-cover ${iconAvatar ? "p-[25%]" : "p-0"} `}
+            alt={imgAlt}
           />
-        ) : (
-          <span className="text-xl font-medium text-primary-900">{title}</span>
+
         )}
       </div>
     </div>
@@ -71,7 +79,13 @@ const Avatar = ({
 export default Avatar;
 
 Avatar.propTypes = {
-  className: PropTypes.string,
-  imgClassName: PropTypes.string,
-  children: PropTypes.node,
+    className: PropTypes.string,
+    imgClassName: PropTypes.string,
+    imgSrc: PropTypes.string,
+    imgWidth: PropTypes.string,
+    imgHeight: PropTypes.string,
+    children: PropTypes.node,
+    iconAvatar: PropTypes.bool,
+    bgColor: PropTypes.string,
+    titleColor: PropTypes.string,
 };

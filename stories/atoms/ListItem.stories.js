@@ -2,22 +2,22 @@ import React from "react";
 import ListItem from "../../atoms/ListItem";
 
 export default {
-  title: "Atoms/ListItem",
-  component: ListItem,
+    title: "Atoms/ListItem",
+    component: ListItem,
 };
 
 const Template = (args) => <ListItem {...args} />;
 
-export const unorderedList = Template.bind({});
+export const Listitem = Template.bind({});
 
-unorderedList.args = {
+Listitem.args = {
   className: "",
   Type: "ul",
   lists: [
     {
       item: "Edit",
       link: "",
-      listIconSrc: "../images/icons/edit-square.svg",
+      listIconSrc: "/images/icons/edit-square.svg",
       listIconWidth: "18",
       listIconHeight: "18",
       listIconAlt: "edit icon"

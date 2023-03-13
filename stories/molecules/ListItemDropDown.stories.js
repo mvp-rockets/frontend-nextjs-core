@@ -2,7 +2,7 @@ import React from "react";
 import ListItemDropDown from "../../molecules/ListItemDropDown";
 
 export default {
-  title: "molecules/ListItemDropDowns",
+  title: "molecules/socialFeed/ListItemDropDowns",
   component: ListItemDropDown,
 };
 
@@ -18,7 +18,7 @@ ListItemDropDowns.args = {
     {
       item: "Edit",
       link: "",
-      listIconSrc: "../images/icons/edit-square.svg",
+      listIconSrc: "/images/icons/edit-square.svg",
       listIconWidth: "18",
       listIconHeight: "18",
       listIconAlt: "edit icon"

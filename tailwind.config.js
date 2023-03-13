@@ -92,18 +92,7 @@ module.exports = {
                 411: "103rem",
                 572: "35.75rem",
             },
-
-            // backgroundImage: {
-            //     sort: "url('/images/icons/sort-icon.svg')",
-            //     ascSort: "url('/images/icons/sort-icon.svg')",
-            //     dscSort: "url('/images/icons/sort-icon.svg')",
-            // },
-
-            margin: {
-                10: "10%",
-                100: "100%",
-            },
-
+            
             top: {
                 10: "10%",
                 100: "100%",
