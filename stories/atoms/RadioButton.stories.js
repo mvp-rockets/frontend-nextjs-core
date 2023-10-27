@@ -1,4 +1,3 @@
-import React from "react";
 import RadioButton from "../../atoms/RadioButton";
 
 export default {

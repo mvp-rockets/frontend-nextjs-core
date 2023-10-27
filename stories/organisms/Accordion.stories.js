@@ -40,4 +40,5 @@ const Template = (args) => <Accordion {...args} />;
 export const Accordions = Template.bind({});
 Accordions.args = {
   accordionData,
+  multipleOpen: false,
 };

@@ -1,21 +1,13 @@
 import PropTypes from "prop-types";
-import React from "react";
 
 const Text = ({
-  variant = "body",
-  fontSize = "",
-  fontWeight = "font-normal",
-  textColor = "text-neutral-900",
+  variant,
+  fontSize,
+  fontWeight,
   children,
   className,
   onClick,
 }) => {
-  const TextType = {
-    body: "body",
-    bodySmall: "bodySmall",
-    caption: "caption",
-  };
-
   const TextStyle = {
     body: "text-base",
     bodySmall: "text-sm",
@@ -23,9 +15,11 @@ const Text = ({
   };
   return (
     <p
-      variant={TextType[variant]}
-      className={`${TextStyle[variant]} ${fontSize} ${fontWeight} ${textColor} ${className}`}
-      onClick={onClick}>
+      className={`${TextStyle[variant] || TextStyle.body} ${fontSize} ${
+        fontWeight || ""
+      } ${className || ""}`}
+      onClick={onClick}
+    >
       {children}
     </p>
   );
@@ -34,10 +28,30 @@ const Text = ({
 export default Text;
 
 Text.propTypes = {
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(["body", "bodySmall", "caption"]),
   children: PropTypes.string,
   fontSize: PropTypes.string,
-  fontWeight: PropTypes.string,
-  textColor: PropTypes.string,
+  fontWeight: PropTypes.oneOf([
+    "font-thin",
+    "font-hairline",
+    "font-extralight",
+    "font-light",
+    "font-normal",
+    "font-medium",
+    "font-semibold",
+    "font-bold",
+    "font-extrabold",
+    "font-black",
+  ]),
   className: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+Text.defaultProps = {
+  variant: "body",
+  fontSize: "",
+  fontWeight: "normal",
+  children: "",
+  className: "",
+  onClick: () => {},
 };

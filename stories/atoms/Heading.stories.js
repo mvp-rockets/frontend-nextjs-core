@@ -1,21 +1,18 @@
-import React from "react";
 import Heading from "../../atoms/Heading";
+
 export default {
-  title: "Atoms /Headings",
+  title: "Atoms /Heading",
   component: Heading,
-  argTypes: {
-    type: {
-      control: "select",
-      options: ["h1", "h2", "h3", "h4", "h5", "h6"],
-    },
-  },
 };
 
-const Template = (args) => <Heading {...args} />;
+const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
-export const Headings = Template.bind({});
+export const Headings = (args) =>
+  headings.map((type) => (
+    <Heading key={type} {...args} type={type} />
+  ));
+
 Headings.args = {
   className: "",
-  type: "h1",
   children: "Heading content",
 };

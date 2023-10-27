@@ -1,22 +1,29 @@
-import React from "react";
 import InputNumber from "../../atoms/InputNumber";
 export default {
-  title: "Atoms/InputNumbers",
+  title: "Atoms/InputNumber",
   component: InputNumber,
   argTypes: {
     size: {
       control: "select",
       options: ["small", "medium", "large"],
     },
-    variant: {
-      control: "select",
-      options: ["Default", "Small", "Large"],
-    },
   },
 };
 const Template = (args) => <InputNumber {...args} />;
-export const InputNumbers = Template.bind({});
-InputNumbers.args = {
+export const Small = Template.bind({});
+Small.args = {
   disable: false,
-  size: 'medium'
+  size:'small'
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+  disable: false,
+  size:'medium'
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  disable: false,
+  size:'large'
 };

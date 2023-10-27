@@ -1,4 +1,3 @@
-import React from "react";
 
 import SkeletonLoader from "../../atoms/Skeleton/SkeletonLoader";
 
@@ -12,13 +11,13 @@ const Template = (args) => <SkeletonLoader {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    type: "medicineSummery",
+    type: "medicineSummary",
     length: 1,
 };
 
-export const ClinicBlogSummery = Template.bind({});
-ClinicBlogSummery.args = {
-    type: "clinicBlogSummery",
+export const ClinicBlogSummary = Template.bind({});
+ClinicBlogSummary.args = {
+    type: "clinicBlogSummary",
     length: 1,
 };
 
@@ -34,15 +33,15 @@ FeedCard.args = {
     length: 1,
 };
 
-export const ClinicSummery = Template.bind({});
-ClinicSummery.args = {
-    type: "clinicDoctorSummery",
+export const ClinicSummary = Template.bind({});
+ClinicSummary.args = {
+    type: "clinicDoctorSummary",
     length: 1,
     isShowServices: true,
 };
 
-export const DoctorSummery = Template.bind({});
-DoctorSummery.args = {
-    type: "clinicDoctorSummery",
+export const DoctorSummary = Template.bind({});
+DoctorSummary.args = {
+    type: "clinicDoctorSummary",
     length: 1,
 };

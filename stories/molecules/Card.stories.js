@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "../../molecules/Card";
 
 export default {
@@ -27,8 +26,8 @@ WithIcon.args = {
   HeadingText : "Card title",
   SecondaryText : "Card with Icon",
   variant : 'cardWithIcon',
-  iconAlt : '/images/icons/home.svg',
-  iconSrc : 'Home Icon',
+  iconAlt : 'Home Icon',
+  iconSrc : '/images/icons/home.svg',
 };
 
 export const WithImage = Template.bind({});

@@ -1,43 +1,75 @@
+import Image from "next/image";
 import PropTypes from "prop-types";
-import IcomoonIcon from "./IcomoonIcon";
 
-const Alert = ({ children, variant = "info", alertClass = "" }) => {
-    const alertType = {
-        info: "info",
-        error: "error",
-        success: "success",
-        warning: "warning",
-        infoLight: "infoLight",
-        errorLight: "errorLight",
-        successLight: "successLight",
-        warningLight: "warningLight",
-    };
-
-    const alertStyle = {
-        info: "bg-info-100 text-white",
-        error: "bg-error-100 text-white",
-        success: "bg-success-100 text-white",
-        warning: "bg-warning-100 text-black",
-        infoLight: "bg-info-50 text-info-100",
-        errorLight: "bg-error-50 text-error-100",
-        successLight: "bg-success-50 text-success-100",
-        warningLight: "bg-warning-50 text-warning-100",
-    };
-
-    return (
-        <div variant={alertType[variant]} className={`p-[22px] flex rounded text-sm ${alertStyle[variant]} ${alertClass}`}>
-            <span className={`mr-3.5 flex items-center flex-shrink-0`}>
-                <IcomoonIcon icon={variant} size={20} />
-            </span>
-
-            {children}
-        </div>
-    );
+const alertTypes = {
+  info: {
+    bgColor: "bg-info-100",
+    textColor: "text-white",
+  },
+  error: {
+    bgColor: "bg-error-100",
+    textColor: "text-white",
+  },
+  success: {
+    bgColor: "bg-success-100",
+    textColor: "text-white",
+  },
+  warning: {
+    bgColor: "bg-warning-100",
+    textColor: "text-white",
+  },
+  infoLight: {
+    bgColor: "bg-info-50",
+    textColor: "text-info-100",
+  },
+  errorLight: {
+    bgColor: "bg-error-50",
+    textColor: "text-error-100",
+  },
+  successLight: {
+    bgColor: "bg-success-50",
+    textColor: "text-success-100",
+  },
+  warningLight: {
+    bgColor: "bg-warning-50",
+    textColor: "text-warning-100",
+  },
 };
-export default Alert;
+
+
+const Alert = ({ children, variant, isIcon }) => {
+  const alertType = alertTypes[variant] || alertTypes.info;
+  return (
+    <div
+      variant={alertType[variant]}
+      className={`py-4 px-5 flex rounded text-sm font-normal ${alertType.bgColor} ${alertType.textColor}`}
+    >
+      {isIcon && (
+        <span className={`mr-2.5 flex items-center flex-shrink-0`}>
+          <Image
+            src={`images/icons/${variant}.svg`}
+            width="20"
+            height="20"
+            alt="icon"
+          />
+        </span>
+      )}
+
+      {children}
+    </div>
+  );
+};
+
+Alert.defaultProps = {
+  children: "This is an Alert-error",
+  variant: "info",
+  isIcon: true,
+};
 
 Alert.propTypes = {
-    variant: PropTypes.string,
-    alertClass: PropTypes.string,
-    children: PropTypes.string,
+  variant: PropTypes.string,
+  isIcon: PropTypes.bool,
+  children: PropTypes.string,
 };
+
+export default Alert;

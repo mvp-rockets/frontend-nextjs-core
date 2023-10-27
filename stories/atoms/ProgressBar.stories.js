@@ -17,9 +17,23 @@ export default {
 
 const Template = (args) => <ProgressBar {...args} />;
 
-export const ProgressBars = Template.bind({});
-ProgressBars.args = {
+export const Rounded = Template.bind({});
+Rounded.args = {
   size: "default",
   value: "60%",
   style: "rounded",
+};
+
+export const Soft = Template.bind({});
+Soft.args = {
+  size: "default",
+  value: "60%",
+  style: "soft",
+};
+
+export const Sharp = Template.bind({});
+Sharp.args = {
+  size: "default",
+  value: "60%",
+  style: "sharp",
 };

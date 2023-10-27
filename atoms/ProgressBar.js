@@ -1,55 +1,51 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const progressBarStyle = {
-  rounded: "rounded",
-  soft: "soft",
-  sharp: "sharp",
+const progressBarStyles = {
+  rounded: "rounded-full",
+  soft: "rounded",
+  sharp: "rounded-none",
 };
 
-const sizes = {
-  default: "default",
-  small: "small",
+const progressBarSizes = {
+  default: "h-4",
+  small: "h-2",
 };
 
 const ProgressBar = ({
-  style = progressBarStyle.rounded,
-  size = sizes.small,
-  hideLabel = false,
-  background = "bg-neutral-200",
-  activeBackground = "bg-primary-900",
-  className = "",
-  value = "40%",
+  style,
+  size,
+  hideLabel,
+  background,
+  activeBackground,
+  className,
+  value,
 }) => {
   return (
     <>
       {!hideLabel && (
         <div className="flex mb-2 text-sm justify-between text-neutral-800">
           <span>On Going</span>
-          <span>45%</span>
+          <span>{value}</span>
         </div>
       )}
 
       <div
-        className={classnames([className], "w-full", background, {
-          "rounded-full": style === progressBarStyle.rounded,
-          rounded: style === progressBarStyle.soft,
-          "rounded-none": style === progressBarStyle.sharp,
-        })}>
-
+        className={classnames(
+          className,
+          "w-full",
+          background,
+          progressBarStyles[style]
+        )}
+      >
         <div
           style={{ width: value }}
           className={classnames(
-            [className],
-            "w-full flex items-center", className,
+            className,
+            "w-full flex items-center",
             activeBackground,
-            {
-              "rounded-full": style === progressBarStyle.rounded,
-              rounded: style === progressBarStyle.soft,
-              "rounded-none": style === progressBarStyle.sharp,
-              "h-4": size === sizes.default,
-              "h-2": size === sizes.small,
-            }
+            progressBarStyles[style],
+            progressBarSizes[size]
           )}
         ></div>
       </div>
@@ -57,12 +53,23 @@ const ProgressBar = ({
   );
 };
 
-export default ProgressBar;
+ProgressBar.defaultProps = {
+  style: "rounded",
+  size: "small",
+  hideLabel: false,
+  background: "bg-neutral-200",
+  activeBackground: "bg-primary-900",
+  className: "",
+  value: "40%",
+};
+
 ProgressBar.propTypes = {
-  style: PropTypes.array,
-  size: PropTypes.array,
+  style: PropTypes.oneOf(["rounded", "soft", "sharp"]),
+  size: PropTypes.oneOf(["default", "small"]),
   value: PropTypes.string,
   hideLabel: PropTypes.bool,
   background: PropTypes.string,
   activeBackground: PropTypes.string,
 };
+
+export default ProgressBar;

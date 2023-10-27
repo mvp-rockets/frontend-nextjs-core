@@ -1,131 +1,135 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Image from "next/image";
-import Heading from "../atoms/Heading";
+import PropTypes from "prop-types";
+import { useRef } from "react";
 import Button from "../atoms/Button";
-import IcomoonIcon from "../atoms/IcomoonIcon";
+import Text from "../atoms/Text";
+import useClickOutside from "./Common/ClickOutSide";
 
 const Modal = ({
-  id = "",
-  showModal = false,
   children,
-  overlayClass = "",
-  overLayBg = "bg-black ",
-  overLayOpacity = "bg-opacity-20",
-  cardWidth = "",
-  cardClass = "",
-  cardBg = "bg-white",
-  cardBorder = "border",
-  cardBorderColor = "border-gray-200",
-  cardRadius = "rounded-sm",
-  cardPadding = "p-6",
-  cardShadow = "shadow-card",
-  closeIcon = "close-b",
-  modalHeight = "min-h-screen",
-  modalPosition = "fixed",
-  modalAlignment = "items-center",
-  closeIconClass = "",
-  closeModalPopup = () => { },
-  modalHeader = true,
-  modalTitle,
-  modalTitleClass = "",
-  modalFooter = true,
-  modalPrimaryBtn = true,
-  modalSecondaryBtn = false,
-  primaryBtnLabel = "Yes",
-  secondaryBtnLabel = "No",
-  modalPrimaryBtnStyle = "primary",
-  modalSecondaryBtnStyle = "ghost",
-  btnRadius = "rounded",
-  btnSize = "extraSmall",
-  primaryBtnClick = () => { },
-  modalBodyClass = "",
-  modalFooterClass = "",
-  btnAlignment = "justify-end",
-  baseModal = false,
+  isHeader,
+  title,
+  closeIcon,
+  titleStyle,
+  width,
+  height,
+  onClick,
+  close,
+  iconSize,
+  radius,
+  footerButtons,
+  ...props
 }) => {
+  const dialogRef = useRef();
+  useClickOutside(dialogRef, close);
   return (
-    <>
-      {showModal && (
-        <div id={id} className={`w-full inset-0 ${modalPosition} z-50 `}>
-          <div className={`flex justify-center ${modalHeight} ${modalAlignment}`}>
-            <div
-              className={`fixed inset-0 ${overLayBg} ${overLayOpacity} ${overlayClass}`}
-              onClick={closeModalPopup}
-            ></div>
-            <div
-              className={`relative w-full  ${cardBg} ${cardBorder} ${cardBorderColor} ${cardRadius}  ${cardShadow} ${cardClass} ${cardWidth} ${baseModal ? "p-0" : cardPadding}`}
-            >
-              {modalHeader && <div>
-                {modalTitle && (
-                  <div className="px-6 py-4 border-b border-secondary-200">
-                    <Heading type={6} className={`font-bold  ${modalTitleClass}`}> {modalTitle} </Heading>
-                  </div>
-                )}
-                {closeIcon && (
-                  <div
-                    className={`cursor-pointer absolute top-4 right-6 ${closeIconClass}`}
-                    onClick={closeModalPopup}
-                  >
-                    <IcomoonIcon
-                      icon={closeIcon}
-                      size="16"
-                      color="#6B6B80"
-                    />
-                  </div>
-                )}</div>}
-
-              <div className={`${modalBodyClass} ${baseModal && "p-6 border-b border-neutral-200"}`}>
-                {children}
-              </div>
-
-              {modalFooter && (
-                <div className={`flex items-center ${btnAlignment} ${modalFooterClass} ${baseModal ? "py-2.5 px-4" : "mt-6"}`}>
-                  {modalSecondaryBtn && <Button style={modalSecondaryBtnStyle} btnRadius={btnRadius} label={secondaryBtnLabel} size={btnSize} onClick={closeModalPopup} />}
-
-                  {modalPrimaryBtn && <Button style={modalPrimaryBtnStyle} btnRadius={btnRadius} label={primaryBtnLabel} size={btnSize} onClick={primaryBtnClick} className="ml-2" />}
-                </div>
-              )}
+    <div
+      className={`dialog fixed flex items-center justify-center w-full h-full top-0 left-0 bg-black bg-opacity-70 z-[20000] px-4 md:px-0 ${props.className}`}
+    >
+      <div
+        ref={dialogRef}
+        className={`bg-white h-auto ${radius} ${width} ${height} `}
+      >
+        {isHeader && (
+          <div className="dialog-header border-b flex items-center justify-between gap-10 px-6 py-4">
+            {title && (
+              <Text className={`text-neutral-900 font-bold ${titleStyle}`}>
+                {title}
+              </Text>
+            )}
+            <div className={`cursor-pointer`} onClick={close}>
+              <Image
+                src={closeIcon}
+                width={iconSize.width}
+                height={iconSize.height}
+              />
             </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+
+        <div className="px-6 py-4">{children}</div>
+        {footerButtons && footerButtons.length > 0 && (
+          <div
+            className={`flex justify-end gap-2  px-6 py-4 ${
+              isHeader && "border-t"
+            }`}
+          >
+            {footerButtons?.map((button, i) => {
+              return (
+                <Button
+                  key={i}
+                  style={button.style}
+                  label={button.label}
+                  size={button.size}
+                  onClick={button.onClick}
+                  className={button.className}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default Modal;
 
+Modal.defaultProps = {
+  children: "Body",
+  title: "Dialog Box",
+  closeIcon: "/images/icons/close-b.svg",
+  isHeader: true,
+  titleStyle: "",
+  width: "w-[416px]",
+  height: "h-max",
+  onClick: () => true,
+  close: () => true,
+  iconSize: {
+    width: 16,
+    height: 16,
+  },
+  radius: "rounded",
+  footerButtons: [
+    {
+      label: "No",
+      style: "ghost",
+      size: "extraSmall",
+      className: "rounded",
+      onClick: () => {},
+    },
+    {
+      label: "Yes",
+      style: "primary",
+      size: "extraSmall",
+      className: "rounded",
+      onClick: () => {},
+    },
+  ],
+};
+
 Modal.propTypes = {
-  showModal: PropTypes.bool,
-  overLayBg: PropTypes.string,
-  overLayOpacity: PropTypes.string,
-  overlayClass: PropTypes.string,
   children: PropTypes.node,
-  cardWidth: PropTypes.string,
-  cardClass: PropTypes.string,
-  cardBg: PropTypes.string,
-  cardBorder: PropTypes.string,
-  cardBorderColor: PropTypes.string,
-  cardRadius: PropTypes.string,
-  cardPadding: PropTypes.string,
-  cardShadow: PropTypes.string,
+  title: PropTypes.string,
   closeIcon: PropTypes.string,
-  CloseIconWidth: PropTypes.number,
-  CloseIconHeight: PropTypes.number,
-  modalPosition: PropTypes.string,
-  modalAlignment: PropTypes.string,
-  closeIconClass: PropTypes.string,
-  closeModalPopup: PropTypes.func,
-  modalTitle: PropTypes.string,
-  modalTitleClass: PropTypes.string,
-  modalFooter: PropTypes.bool,
-  modalPrimaryBtn: PropTypes.bool,
-  modalSecondaryBtn: PropTypes.bool,
-  primaryBtnLabel: PropTypes.string,
-  secondaryBtnLabel: PropTypes.string,
-  primaryBtnClick: PropTypes.func,
-  modalBodyClass: PropTypes.string,
-  modalFooterClass: PropTypes.string,
-  baseModal: PropTypes.bool,
+  isHeader: PropTypes.bool,
+  titleStyle: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  onClick: PropTypes.func,
+  close: PropTypes.func,
+  iconSize: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
+  radius: PropTypes.string,
+  footerButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      style: PropTypes.string,
+      size: PropTypes.string,
+      className: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  ),
 };

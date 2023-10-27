@@ -1,63 +1,33 @@
-import React from "react";
+import Image from "next/image";
 import PropTypes from "prop-types";
 import Heading from "../atoms/Heading";
-import Image from "next/image";
 import Text from "../atoms/Text";
 import Modal from "./Modal";
-import IcomoonIcon from "../atoms/IcomoonIcon";
 
-const AlertModal = ({
-  modalHeading = "Warning Modal",
-  cardWidth = "max-w-md",
-  modalSubHeading = "",
-  modalIcon = "",
-  primaryBtnLabel = "Yes",
-  secondaryBtnLabel = "No",
-  showModal,
-  closeModalPopup,
-  cardPadding = "p-8 pb-6",
-  cardRadius = "rounded-sm",
-  modalSecondaryBtn = false,
-  primaryBtnClick
-}) => {
+const AlertModal = ({ heading, subHeading, icon, show, footerButtons }) => {
+  if (!show) return null;
   return (
     <>
-      <Modal
-        cardRadius={cardRadius}
-        cardPadding={cardPadding}
-        cardWidth={cardWidth}
-        showModal={showModal}
-        modalHeader={false}
-        modalSecondaryBtn={modalSecondaryBtn}
-        secondaryBtnLabel={secondaryBtnLabel}
-        primaryBtnLabel={primaryBtnLabel}
-        closeModalPopup={closeModalPopup}
-        primaryBtnClick={primaryBtnClick}
-      >
-        <div
-          className={`flex`}
-        >
-          {modalIcon && (
+      <Modal isHeader={false} footerButtons={footerButtons}>
+        <div className="flex py-4 px-2">
+          {icon && (
             <div className="flex-shrink-0 mr-4">
-              <IcomoonIcon icon={modalIcon} size={34} />
+              <Image
+                src={icon.src}
+                width={icon.width}
+                height={icon.height}
+                alt={icon.alt}
+              />
             </div>
           )}
           <div>
-            {modalHeading && (
-
-              <Heading
-                type="h6"
-                className={`font-bold mb-2`}
-              >
-                {modalHeading}
+            {heading && (
+              <Heading type="h6" className={`font-bold mb-2`}>
+                {heading}
               </Heading>
             )}
-            {modalSubHeading && (
-              <Text
-                className={`text-sm text-gray-500`}
-              >
-                {modalSubHeading}
-              </Text>
+            {subHeading && (
+              <Text className={`text-sm text-gray-500`}>{subHeading}</Text>
             )}
           </div>
         </div>
@@ -67,26 +37,52 @@ const AlertModal = ({
 };
 
 export default AlertModal;
-AlertModal.propTypes = {
-  showModal: PropTypes.bool,
-  cardWidth: PropTypes.string,
-  cardPadding: PropTypes.string,
-  cardRadius: PropTypes.string,
-  modalInnerWidth: PropTypes.string,
-  modalInnerAlignment: PropTypes.string,
-  modalButtonAlign: PropTypes.string,
-  modalBtnBg: PropTypes.string,
-  modalHeading: PropTypes.string,
-  modalSubHeading: PropTypes.string,
-  isImgAvail: PropTypes.any,
-  closeModalPopup: PropTypes.func,
-  onClick: PropTypes.func,
-  modalIcon: PropTypes.string,
-  primaryBtnLabel: PropTypes.string,
-  secondaryBtnLabel: PropTypes.string,
-  modalHeadingClass: PropTypes.string,
-  modalSubHeadingClass: PropTypes.string,
-  modalSecondaryBtn: PropTypes.bool,
-  primaryBtnClick: PropTypes.func,
 
+AlertModal.defaultProps = {
+  show: true,
+  heading: "Alert Heading",
+  subHeading: "Alert Subheading",
+  icon: PropTypes.shape({
+    src: "",
+    width: 20,
+    height: 20,
+    alt: "",
+  }),
+  footerButtons: [
+    {
+      label: "No",
+      style: "ghost",
+      size: "extraSmall",
+      className: "rounded",
+      onClick: () => {},
+    },
+    {
+      label: "Yes",
+      style: "primary",
+      size: "extraSmall",
+      className: "rounded",
+      onClick: () => {},
+    },
+  ],
+};
+
+AlertModal.propTypes = {
+  show: PropTypes.bool,
+  heading: PropTypes.string,
+  subHeading: PropTypes.string,
+  icon: PropTypes.shape({
+    src: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    alt: PropTypes.string,
+  }),
+  footerButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      style: PropTypes.string,
+      size: PropTypes.string,
+      className: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  ),
 };

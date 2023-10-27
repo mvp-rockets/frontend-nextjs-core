@@ -1,17 +1,16 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { getTrackBackground, Range } from "react-range";
-import IcomoonIcon from "./IcomoonIcon";
+import { Range, getTrackBackground } from "react-range";
 
 const RangeSlider = ({
-  step = 1,
-  min = 0,
-  max = 100,
-  label = "years",
-  colorFrom = "#D1D1DB",
-  colorTo = "#1E3A8A",
-  onSlide = () => { },
-  sliderValues = [30, 100],
+  step,
+  min,
+  max,
+  label,
+  colorFrom,
+  colorTo,
+  onSlide,
+  sliderValues,
 }) => {
   const [values, setValues] = useState(
     sliderValues ? sliderValues : [min, max]
@@ -33,13 +32,16 @@ const RangeSlider = ({
         step={step}
         min={min}
         max={max}
-        onChange={(values) => {
-          setValues(values);
-          onSlide(values);
+        onChange={(val) => {
+          setValues(val);
+          onSlide(val);
         }}
         renderTrack={({ props, children }) => (
           <div className="w-full">
-            <div className="mb-4 text-neutral-900 flex items-center" id="output">
+            <div
+              className="mb-4 text-neutral-900 flex items-center"
+              id="output"
+            >
               {values[0]}
               <span className="w-4 h-1 bg-neutral-300 inline-block mx-2"></span>
               {values[1]} {label}
@@ -77,17 +79,25 @@ const RangeSlider = ({
         renderThumb={({ props, isDragged }) => (
           <div
             {...props}
-            className={`flex items-center justify-center w-6 h-6 bg-white shadow-[0px_2px_4px_rgba(0,0,0,0.1)] outline-0 rounded-full`}
-          >
-            <IcomoonIcon icon={"range-thumb"} size={10} />
-          </div>
+            className={`w-6 h-6 bg-white bg-rangeThumb shadow-[0px_2px_4px_rgba(0,0,0,0.1)] bg-no-repeat bg-center outline-0 rounded-full`}
+          ></div>
         )}
       />
     </div>
   );
 };
 
-export default RangeSlider;
+RangeSlider.defaultProps = {
+  step: 1,
+  min: 0,
+  max: 100,
+  label: "years",
+  colorFrom: "#D1D1DB",
+  colorTo: "#1E3A8A",
+  onSlide: () => {},
+  sliderValues: [30, 100],
+};
+
 RangeSlider.propTypes = {
   step: PropTypes.number,
   min: PropTypes.number,
@@ -95,4 +105,8 @@ RangeSlider.propTypes = {
   label: PropTypes.string,
   colorFrom: PropTypes.string,
   colorTo: PropTypes.string,
+  onSlide: PropTypes.func,
+  sliderValues: PropTypes.arrayOf(PropTypes.number),
 };
+
+export default RangeSlider;

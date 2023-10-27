@@ -1,4 +1,3 @@
-import React from "react";
 import TimeLine from "../../molecules/Timeline";
 export default {
   title: "Molecules /TimeLines",

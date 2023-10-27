@@ -1,90 +1,89 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const AccordionList = ({ variant = "base", title, content }) => {
-  const [isActive, setIsActive] = useState(false);
-  const accordionType = {
-    base: "border-x-0 ",
-    normal: "first:border-t",
-  };
+const AccordionList = ({ title, content, isActive, onClick }) => {
+  const accordionClasses = `shadow-accordion ${
+    isActive ? "border-t-2 border-t-primary-900" : ""
+  }`;
 
-  const [display, setDisplay] = useState("hidden");
-
-  const [opacity, setOpacity] = useState("opacity-0");
-
-  const toggleActive = () => {
-    if (display === "hidden") {
-      setDisplay("block");
-      setTimeout(() => setOpacity("opacity-100"), 100);
-    }
-
-    if (display === "block") {
-      setOpacity("opacity-0");
-      setTimeout(() => setDisplay("hidden"), 100);
-    }
-
-    setIsActive(!isActive);
-  };
+  const titleClasses = `text-lg text-neutral-900 pr-3 ${
+    isActive ? "font-medium" : "font-normal"
+  }`;
 
   return (
-    <div
-      variant={variant}
-      className={`border group border-neutral-300  ${accordionType[variant]} ${
-        isActive ? "border-t border-t-primary-900" : "border-t-0"
-      }`}
-    >
+    <div className={`${accordionClasses}`}>
       <div
         className="flex justify-between p-4 cursor-pointer"
-        onClick={toggleActive}
+        onClick={onClick}
       >
-        <div
-          className={`text-lg text-neutral-900 pr-3 ${
-            isActive && "font-medium"
-          }`}
-        >
-          {title}
-        </div>
+        <div className={titleClasses}>{title}</div>
         <div className="flex flex-shrink-0">
           {isActive ? (
-            <Image
-              src="/images/icons/angle-up-b.svg"
-              width="18"
-              height="10"
-              alt=""
-            />
+            <Image src="/images/icons/angle-up-b.svg" width="18" height="10" />
           ) : (
-            <Image
-              src="/images/icons/angle-down.svg"
-              width="18"
-              height="10"
-              alt=""
-            />
+            <Image src="/images/icons/angle-down.svg" width="18" height="10" />
           )}
         </div>
       </div>
-
       <div
-        className={`p-4 pt-2 ${display} ${opacity} text-neutral-700 text-sm  transition-all duration-300 ease-in-out`}
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></div>
+        className={`max-h-0 overflow-hidden transition-max-height duration-500 ease-in-out ${
+          isActive ? "max-h-screen" : ""
+        }`}
+      >
+        <div className="p-4 pt-2 text-neutral-700">{content}</div>
+      </div>
     </div>
   );
 };
 
-const Accordion = ({ variant, accordionData }) => {
+const Accordion = ({ accordionData, multipleOpen }) => {
+  const [activeIndices, setActiveIndices] = useState([]);
+
+  const handleAccordionClick = (index) => {
+    if (multipleOpen) {
+      setActiveIndices((prevIndices) =>
+        prevIndices.includes(index)
+          ? prevIndices.filter((item) => item !== index)
+          : [...prevIndices, index]
+      );
+    } else {
+      if (activeIndices.includes(index)) {
+        setActiveIndices([]);
+      } else {
+        setActiveIndices([index]);
+      }
+    }
+  };
+
   return (
-    <>
-      {accordionData.map(({ title, content }) => (
-        <AccordionList variant={variant} title={title} content={content} />
+    <div className="border border-neutral-300 border-b-0">
+      {accordionData.map(({ title, content }, index) => (
+        <AccordionList
+          key={index}
+          title={title}
+          content={content}
+          isActive={activeIndices.includes(index)}
+          onClick={() => handleAccordionClick(index)}
+        />
       ))}
-    </>
+    </div>
   );
 };
 
-export default Accordion;
+Accordion.defaultProps = {
+  accordionData: [],
+  multipleOpen: false,
+};
 
 Accordion.propTypes = {
-  variant: PropTypes.string,
-  accordionData: PropTypes.array,
+  accordionData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      content: PropTypes.string,
+    })
+  ),
+  multipleOpen: PropTypes.bool,
 };
+
+export default Accordion;

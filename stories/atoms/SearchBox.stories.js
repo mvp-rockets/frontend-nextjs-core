@@ -8,10 +8,6 @@ export default {
             control: "select",
             options: ["left", "right",],
         },
-        variant: {
-            control: "select",
-            options: ["Default", "Small", "Large"],
-        },
     },
 };
 

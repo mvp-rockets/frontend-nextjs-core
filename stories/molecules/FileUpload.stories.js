@@ -1,4 +1,3 @@
-import React from "react";
 import FileUpload from "../../molecules/FileUpload";
 
 export default {

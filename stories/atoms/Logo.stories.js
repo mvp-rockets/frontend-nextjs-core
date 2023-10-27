@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../../atoms/Logo";
 
 export default {

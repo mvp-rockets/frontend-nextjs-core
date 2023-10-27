@@ -1,4 +1,3 @@
-import React from "react";
 import Breadcrumb from "../../atoms/Breadcrumb";
 
 export default {
@@ -7,7 +6,7 @@ export default {
   argTypes: {
     divider: {
       control: "select",
-      options: ["primary", "secondary"],
+      options: ["slash", "arrow"],
     },
   },
 };
@@ -19,7 +18,11 @@ export const breadcrumb = Template.bind({});
 breadcrumb.args = {
   data: [
     { name: "Home", path: "/home", isActive: false },
-    { name: "services", path: "/Services", isActive: false },
-    { name: "painting", path: "/Painting", isActive: true },
+    { name: "About", path: "/Services", isActive: false },
+    { name: "Services", path: "/Painting", isActive: true },
+    { name: "Portfolio", path: "/Painting", isActive: true },
+    { name: "FAQs", path: "/Services", isActive: false },
+    { name: "Register", path: "/Painting", isActive: true },
+    { name: "Contact", path: "/Services", isActive: false },
   ],
 };
