@@ -1,52 +1,13 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
-import React from "react";
-import IcomoonIcon from "../atoms/IcomoonIcon";
-const noop = () => { };
+
+const noop = () => {};
 const MAX_VISIBLE_PAGES = 5;
 
-export const _getAttributes = (
-  totalPages,
-  selectedPage = 1,
-  segmentSize = MAX_VISIBLE_PAGES
-) => {
-  const pageSegments = [...new Array(totalPages)]
-    .map((p, i) => i + 1) // [1,2,3,4,5,6,7, ...]
-    .reduce((segments, page, i) => {
-      const segmentIndex = Math.floor(i / segmentSize);
-      if (!segments[segmentIndex]) {
-        segments[segmentIndex] = [];
-      }
-      segments[segmentIndex].push(page);
-      return segments;
-    }, []);
-
-  const visiblePages = pageSegments.filter((segment) =>
-    segment.includes(selectedPage)
-  )[0];
-  const selectedIndex = visiblePages.indexOf(selectedPage);
-
-  const showPrev = !visiblePages.includes(1);
-  const showNext = !visiblePages.includes(totalPages);
-
-  const firstPage = !visiblePages.includes(1) && 1;
-  const lastPage = !visiblePages.includes(totalPages) && totalPages;
-
-  return {
-    visiblePages,
-    selectedIndex,
-    firstPage,
-    lastPage,
-    showPrev,
-    showNext,
-  };
-};
-
 const Pagination = ({
-  paginationClass = "",
-  onPageChange = noop,
-  totalPages = 1,
-  defaultSelectedPage = 1,
+  paginationClass,
+  onPageChange,
+  totalPages,
   selectedPage,
   setSelectedPage,
   paginationLabel,
@@ -55,173 +16,181 @@ const Pagination = ({
     "flex items-center justify-center text-sm text-neutral-900 w-8 h-8 mx-1 border border-neutral-400 rounded";
   const ellipsisState =
     "flex items-end justify-center text-sm text-neutral-900 w-7 h-8  bg-lightGrey";
-  if (defaultSelectedPage > totalPages || defaultSelectedPage < 1) {
-    defaultSelectedPage = 1;
-  }
-  if (totalPages < 1) {
-    totalPages = 1;
+
+  if (selectedPage < 1) {
+    selectedPage = 1;
   }
 
-  const {
-    visiblePages,
-    selectedIndex,
-    showPrev,
-    showNext,
-    firstPage,
-    lastPage,
-  } = _getAttributes(totalPages, selectedPage);
-  console.log("get attribute after", selectedPage);
+  const totalPageArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const visiblePages = totalPageArray.slice(
+    Math.max(0, selectedPage - 2),
+    selectedPage + 3
+  );
+  const showPrev = selectedPage > 1;
+  const showNext = selectedPage < totalPages;
+  const showFirstPage = selectedPage > 3;
+  const showLastPage = selectedPage < totalPages - 2;
 
-  const handlePageClick = ({ target }) => {
-    const page = parseInt(target.dataset.page, 10);
+  const handlePageClick = (page) => {
     setSelectedPage(page);
     onPageChange(page);
   };
 
   const handlePrevClick = () => {
-    const newSelectedPage = selectedPage - 1;
-    setSelectedPage(newSelectedPage);
-    onPageChange(newSelectedPage);
+    handlePageClick(selectedPage - 1);
   };
 
   const handleNextClick = () => {
-    const newSelectedPage = selectedPage + 1;
-    setSelectedPage(newSelectedPage);
-    onPageChange(newSelectedPage);
+    handlePageClick(selectedPage + 1);
   };
 
   return (
-    <div>
-      <div
-        className={`flex flex-wrap items-center justify-center md:justify-between${paginationClass}`}
-      >
-        {paginationLabel && (
-          <div className="text-sm text-neutral-600 mb-4 md:mb-0 ">
-            {paginationLabel}
-          </div>
-        )}
-        <nav aria-label="pagination">
-          <ul className="flex">
-            <li>
-              <span
-                role="button"
-                tabIndex={0}
-                aria-disabled={!showPrev}
-                aria-label="Previous page"
-                onClick={handlePrevClick}
-                onKeyUp={({ key }) => {
-                  if (key === "Enter") {
-                    handlePrevClick();
-                  }
-                }}
-                className={`${normalState} ${!showPrev && "opacity-50 pointer-events-none"
-                  }`}
-              >
-                <IcomoonIcon icon="angle-left" size={12} />
-              </span>
-            </li>
+    <div
+      className={`flex flex-wrap items-center justify-center md:justify-between${paginationClass}`}
+    >
+      {paginationLabel && (
+        <div className="text-sm text-neutral-600 mb-4 md:mb-0 ">
+          {paginationLabel}
+        </div>
+      )}
+      <nav aria-label="pagination">
+        <ul className="flex">
+          <li>
+            <span
+              role="button"
+              tabIndex={0}
+              aria-disabled={!showPrev}
+              aria-label="Previous page"
+              onClick={handlePrevClick}
+              onKeyUp={({ key }) => {
+                if (key === "Enter" && showPrev) {
+                  handlePrevClick();
+                }
+              }}
+              className={`${normalState} ${
+                !showPrev && "opacity-50 pointer-events-none"
+              }`}
+            >
+              <Image src="/images/icons/angle-left.svg" width="6" height="10" />
+            </span>
+          </li>
 
-            {firstPage && (
-              <li className="">
-                <span
-                  role="button"
-                  tabIndex={0}
-                  aria-label="First page"
-                  onClick={handlePageClick}
-                  onKeyUp={(e) => {
-                    if (e.key === "Enter") {
-                      handlePageClick(e);
-                    }
-                  }}
-                  data-page={firstPage}
-                  className={`${normalState}`}
-                >
-                  {firstPage.toString()}
-                </span>
-              </li>
-            )}
-            {firstPage && (
-              <li className={`${ellipsisState} `}>
-                <div className="ellipsis">&hellip;</div>
-              </li>
-            )}
-
-            {visiblePages.map((page, i) => (
+          {showFirstPage && (
+            <>
               <li>
                 <span
                   role="button"
                   tabIndex={0}
-                  className={`${normalState} ${i === selectedIndex && "border-primary-900 text-primary-900"
-                    }`}
-                  data-page={page}
-                  onClick={handlePageClick}
-                  onKeyUp={(e) => {
-                    if (e.key === "Enter") {
-                      handlePageClick(e);
+                  aria-label="First page"
+                  onClick={() => handlePageClick(1)}
+                  onKeyUp={({ key }) => {
+                    if (key === "Enter") {
+                      handlePageClick(1);
                     }
                   }}
-                  aria-label={`Page ${page}`}
-                  aria-current={i === selectedIndex && "page"}
+                  className={`${normalState}`}
                 >
-                  {page.toString()}
+                  1
                 </span>
               </li>
-            ))}
-
-            {lastPage && (
               <li className={`${ellipsisState}`}>
                 <div className="ellipsis">&hellip;</div>
               </li>
-            )}
-            {lastPage && (
+            </>
+          )}
+
+          {visiblePages.map((page) => (
+            <li key={page}>
+              <span
+                role="button"
+                tabIndex={0}
+                className={`${normalState} ${
+                  page === selectedPage
+                    ? "border-primary-900 text-primary-900"
+                    : ""
+                }`}
+                onClick={() => handlePageClick(page)}
+                onKeyUp={({ key }) => {
+                  if (key === "Enter") {
+                    handlePageClick(page);
+                  }
+                }}
+                aria-label={`Page ${page}`}
+                aria-current={page === selectedPage && "page"}
+              >
+                {page}
+              </span>
+            </li>
+          ))}
+
+          {showLastPage && (
+            <>
+              <li className={`${ellipsisState}`}>
+                <div className="ellipsis">&hellip;</div>
+              </li>
               <li>
                 <span
                   role="button"
                   tabIndex={0}
                   aria-label="Last page"
-                  onClick={handlePageClick}
-                  onKeyUp={(e) => {
-                    if (e.key === "Enter") {
-                      handlePageClick(e);
+                  onClick={() => handlePageClick(totalPages)}
+                  onKeyUp={({ key }) => {
+                    if (key === "Enter") {
+                      handlePageClick(totalPages);
                     }
                   }}
-                  data-page={lastPage}
                   className={`${normalState}`}
                 >
-                  {lastPage.toString()}
+                  {totalPages}
                 </span>
               </li>
-            )}
+            </>
+          )}
 
-            <li>
-              <span
-                role="button"
-                tabIndex={0}
-                aria-disabled={!showNext}
-                aria-label="Next page"
-                onClick={handleNextClick}
-                onKeyUp={({ key }) => {
-                  if (key === "Enter") {
-                    handleNextClick();
-                  }
-                }}
-                className={`${normalState} ${!showNext && "opacity-50 pointer-events-none"
-                  }`}
-              >
-                <IcomoonIcon icon="angle-right" size={12} />
-              </span>
-            </li>
-          </ul>
-        </nav>
-      </div>
+          <li>
+            <span
+              role="button"
+              tabIndex={0}
+              aria-disabled={!showNext}
+              aria-label="Next page"
+              onClick={handleNextClick}
+              onKeyUp={({ key }) => {
+                if (key === "Enter" && showNext) {
+                  handleNextClick();
+                }
+              }}
+              className={`${normalState} ${
+                !showNext && "opacity-50 pointer-events-none"
+              }`}
+            >
+              <Image
+                src="/images/icons/angle-right.svg"
+                width="6"
+                height="10"
+              />
+            </span>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 };
 
+Pagination.defaultProps = {
+  paginationClass: "",
+  onPageChange: noop,
+  totalPages: 1,
+  selectedPage: 1,
+  setSelectedPage: () => {},
+  paginationLabel: "",
+};
+
 Pagination.propTypes = {
-  totalPages: PropTypes.number.isRequired,
-  defaultSelectedPage: PropTypes.number,
+  paginationClass: PropTypes.string,
   onPageChange: PropTypes.func,
+  totalPages: PropTypes.number,
+  selectedPage: PropTypes.number,
+  setSelectedPage: PropTypes.func,
   paginationLabel: PropTypes.string,
 };
 

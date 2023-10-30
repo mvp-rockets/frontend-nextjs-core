@@ -1,10 +1,8 @@
-import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 
-import Card from '../Card'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const SkeletonMedicineShortSummery = ({ length }) => {
+const SkeletonMedicineShortSummary = ({ length }) => {
     return Array.from({ length }).map((_, index) => (
         <div className={`flex gap-3 w-full bg-basic-white hover:bg-primary1-50 transition-regular cursor-pointer border-t border-b border-gray-100 p-5 pb-5 min-h-23.25`}>
 
@@ -24,4 +22,4 @@ const SkeletonMedicineShortSummery = ({ length }) => {
     ))
 }
 
-export default SkeletonMedicineShortSummery
+export default SkeletonMedicineShortSummary

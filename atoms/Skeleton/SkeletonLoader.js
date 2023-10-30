@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -15,7 +15,7 @@ const User = ({ className = '', circleSize, lineWidth }) => <div className={`${c
 </div>
 
 const SkeletonTypes = {
-    medicineSummery: ({ index }) => <div key={index} className='flex w-full md:w-[214px] cursor-pointer flex-col bg-basic-white p-5 md:px-3.5 md:pb-6 md:pt-3 shadow-sm relative md:rounded-2xl'>
+    medicineSummary: ({ index }) => <div key={index} className='flex w-full md:w-[214px] cursor-pointer flex-col bg-basic-white p-5 md:px-3.5 md:pb-6 md:pt-3 shadow-sm relative md:rounded-2xl'>
         <div className='flex md:flex-col justify-between gap-3.5 md:gap-3' >
             <div className='md:hidden'><Skeleton width={78} height={78} /></div>
             <div className='hidden md:block'><Skeleton height={140} /></div>
@@ -35,7 +35,7 @@ const SkeletonTypes = {
         </div>
     </div>,
 
-    clinicBlogSummery: ({ index }) => <div key={index} type='regularMob' className='p-4 pb-5 flex flex-col md:flex-row gap-6 relative'>
+    clinicBlogSummary: ({ index }) => <div key={index} type='regularMob' className='p-4 pb-5 flex flex-col md:flex-row gap-6 relative'>
         <Skeleton className='w-full h-full shrink-0' containerClassName='w-full h-full rounded-lg w-full h-40 md:h-62.5 md:w-82.5' />
         <div className='flex-grow'>
             <Skeleton width={200} height={24} className='mb-6 md:mt-3' />
@@ -81,7 +81,7 @@ const SkeletonTypes = {
         </div>
     },
 
-    blogSummery: ({ index, isShowServices = false }) => {
+    blogSummary: ({ index, isShowServices = false }) => {
         return <div key={index} className={`card--regular mb-2 relative overflow-hidden`}>
             <div className={`flex-col flex p-4 pb-2`}>
                 <div className='relative aspect-[342/223] rounded-'>
@@ -124,7 +124,7 @@ const SkeletonTypes = {
         </div>
     </div>,
 
-    userShortSummery: ({ index, isCircularImage = true, minHeight, isHideParagraph = false, }) => {
+    userShortSummary: ({ index, isCircularImage = true, minHeight, isHideParagraph = false, }) => {
         return <div key={index} className={`flex gap-3 w-full bg-basic-white hover:bg-primary1-50 transition-regular cursor-pointer border-t border-b border-gray-100 px-5 items-center`} style={{ minHeight: minHeight || 70 }}>
 
             <Skeleton width={30} height={30} containerClassName="mt-1" className='flex-shrink-0 mb-4' style={{ borderRadius: isCircularImage ? 100 : 4 }} />
@@ -148,7 +148,7 @@ const SkeletonTypes = {
         </div>
     },
 
-    clinicDoctorSummery: ({ index, isShowServices = false }) => {
+    clinicDoctorSummary: ({ index, isShowServices = false }) => {
         return <div key={index} className={`card--regular mb-2 relative overflow-hidden`}>
             <div>
                 <div className={`flex-col flex p-4 pb-2`}>
@@ -247,6 +247,6 @@ SkeletonLoader.defaultProps = {
 SkeletonLoader.propTypes = {
     className: PropTypes.string,
     length: PropTypes.number,
-    type: PropTypes.oneOf(['medicineSummery', 'clinicBlogSummery', 'youtubeCard', 'feedCard', 'userShortSummery', 'singleRow', 'clinicDoctorSummery', 'learningCard', 'courseCard', 'videoTimeline', 'topicCard', 'similarDoctor', 'blogSummery',]),
+    type: PropTypes.oneOf(['medicineSummary', 'clinicBlogSummary', 'youtubeCard', 'feedCard', 'userShortSummary', 'singleRow', 'clinicDoctorSummary', 'learningCard', 'courseCard', 'videoTimeline', 'topicCard', 'similarDoctor', 'blogSummary',]),
 }
 export default SkeletonLoader

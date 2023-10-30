@@ -1,22 +1,36 @@
-import React from "react";
+import Image from "next/image";
 import PropTypes from "prop-types";
-import NextImage from 'next/image';
 
-const Logo = ({
-    ...property}) => {
+const Logo = ({ className, width, height, alt, src, onClick }) => {
+  return (
+    <div className={`cursor-pointer w-fit select-none ${className}`}>
+      <Image
+        onClick={onClick}
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+      />
+    </div>
+  );
+};
 
-    return (
-       <div className={`cursor-pointer w-fit select-none ${property.className}`}>
-            <NextImage onClick={property.onClick} src={property.src} width={property.width} height={property.height} alt={`${property.alt}`} />
-       </div>
-    )
-}
-
-export default Logo
+Logo.defaultProps = {
+  className: "",
+  width: "",
+  height: "",
+  alt: "",
+  src: "",
+  onClick: "",
+};
 
 Logo.propTypes = {
-    className: PropTypes.string,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    alt: PropTypes.string,
-  };
+  className: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  alt: PropTypes.string,
+  src: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default Logo;

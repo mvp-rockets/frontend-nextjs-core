@@ -1,20 +1,14 @@
 import PropTypes from "prop-types";
 
 const Label = ({
-  labelFor = "",
-  variant = "medium",
-  textColor = "text-neutral-900",
-  fontWeight = "",
-  className = "",
+  labelFor,
+  variant,
+  textColor,
+  fontWeight,
+  className,
   children,
-  labelDisable = false,
+  labelDisable,
 }) => {
-  const LabelType = {
-    small: "small",
-    medium: "medium",
-    large: "large",
-  };
-
   const LabelStyle = {
     small: "text-sm",
     medium: "text-base",
@@ -23,12 +17,11 @@ const Label = ({
 
   return (
     <label
-      htmlFor={`${labelFor}`}
-      variant={LabelType[variant]}
+      htmlFor={labelFor}
       className={`${
         LabelStyle[variant]
-      } ${textColor} ${fontWeight}  ${className} ${
-        labelDisable && "opacity-60 pointer-events-none"
+      } ${textColor} ${fontWeight} ${className} ${
+        labelDisable ? "opacity-60 pointer-events-none" : ""
       }`}
     >
       {children}
@@ -36,13 +29,34 @@ const Label = ({
   );
 };
 
-export default Label;
-
 Label.propTypes = {
   labelFor: PropTypes.string,
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(["small", "medium", "large"]),
   textColor: PropTypes.string,
-  fontWeight: PropTypes.string,
+  fontWeight: PropTypes.oneOf([
+    "font-thin",
+    "font-hairline",
+    "font-extralight",
+    "font-light",
+    "font-normal",
+    "font-medium",
+    "font-semibold",
+    "font-bold",
+    "font-extrabold",
+    "font-black",
+  ]),
   className: PropTypes.string,
   children: PropTypes.node,
+  labelDisable: PropTypes.bool,
 };
+
+Label.defaultProps = {
+  labelFor: "",
+  variant: "medium",
+  textColor: "text-neutral-900",
+  fontWeight: "normal",
+  className: "",
+  labelDisable: false,
+};
+
+export default Label;

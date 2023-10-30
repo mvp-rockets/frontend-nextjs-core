@@ -1,4 +1,3 @@
-import React from "react";
 import Steps from "../../molecules/Steps";
 export default {
   title: "Molecules /Step",

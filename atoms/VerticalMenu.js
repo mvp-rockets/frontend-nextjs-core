@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Text from './Text' 
+import PropTypes from 'prop-types';
+import Text from './Text';
 
 const VerticalMenu = ({ menuItems = [], listMainClass, listItemClass, ...properties }) => {
 	return (

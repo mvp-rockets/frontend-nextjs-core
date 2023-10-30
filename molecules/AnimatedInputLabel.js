@@ -7,7 +7,9 @@ const AnimatedInputLabel = ({ inputId, isError, disable, labelTitle }) => {
       <input
         type="text"
         id={inputId}
-        className={`block rounded-t-lg pb-2 pt-6 w-full text-sm text-neutral-900 border-0 border-b  appearance-none focus:outline-none focus:ring-0 focus:border-primary-900 peer ${isError ? "border-error-100" : "border-neutral-300"} ${disable && "opacity-40 pointer-events-none"}`}
+        className={`block rounded-t-lg pb-2 pt-6 w-full text-sm text-neutral-900 border-0 border-b  appearance-none focus:outline-none focus:ring-0 focus:border-primary-900 peer ${
+          isError ? "border-error-100" : "border-neutral-300"
+        } ${disable && "opacity-40 pointer-events-none"}`}
         placeholder=" "
       />
       <Label
@@ -19,10 +21,17 @@ const AnimatedInputLabel = ({ inputId, isError, disable, labelTitle }) => {
   );
 };
 
-export default AnimatedInputLabel;
+AnimatedInputLabel.defaultProps = {
+  inputId: "",
+  isError: false,
+  disable: false,
+  labelTitle: "",
+};
 AnimatedInputLabel.propTypes = {
   inputId: PropTypes.string,
   labelTitle: PropTypes.string,
   isError: PropTypes.bool,
   disable: PropTypes.bool,
 };
+
+export default AnimatedInputLabel;

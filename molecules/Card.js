@@ -1,75 +1,112 @@
-import React from "react";
+import Image from "next/image";
 import PropTypes from "prop-types";
+import Button from "../atoms/Button";
 import Heading from "../atoms/Heading";
 import Text from "../atoms/Text";
-import Button from "../atoms/Button";
-import Icon from "../atoms/Icon";
 
 const Card = ({
-  className = "",
-  variant = "default",
-  backgroundColor = "bg-white",
-  borderRadius = "rounded-md",
-  cardPadding ="p-4",
-  HeadingClass = "",
-  SecondaryTextClass = "",
-  HeadingText = "",
-  SecondaryText ="",
-  imgSrc = "",
-  imgClass = "cursor-pointer",
-  imgAlt = "Image Description",
-  buttonLabel = "",
-  iconSrc = "",
-  iconAlt = "",
-  imgSmall,
+  backgroundColor,
+  borderRadius,
+  cardPadding,
+  headingText,
+  secondaryText,
+  imgSrc,
+  imgWidth,
+  imgHeight,
+  imgClass,
+  imgAlt,
+  buttonLabel,
+  iconSrc,
+  iconWidth,
+  iconHeight,
+  iconAlt,
   onClick,
 }) => {
-
-  const cardType = {
-    default: "default",
-    cardWithIcon: "cardWithIcon",
-    cardWithImage: "cardWithImage",
-    cardWithSmallImage: "cardWithSmallImage",
-    detailCard: "detailCard"
-  };
-
   return (
     <a
-      variant={cardType[variant]}
-      className={`${backgroundColor} ${borderRadius} ${cardPadding} ${className} ${imgSmall ? "flex-row space-x-4 items-center" : "flex-col"} w-fit min-w-[360px] shadow-card flex overflow-hidden`}
-      onClick={onClick}>
-
-        {imgSrc && <div className={` ${imgSmall ? '' : 'pb-6'} `}>
-          <img className={`w-full h-auto ${imgClass}`}
-               src={imgSrc} 
-               alt={imgAlt} />
-        </div> 
-        }
-
-        <div className={`${iconSrc && 'flex items-center space-x-4' }`}>
-            {iconSrc &&  <Icon src={iconSrc} alt={iconAlt}/> }
-            <div className=''>
-                <Heading type={6} className={`text-sm leading-6 font-bold ${HeadingClass}`}> {HeadingText} </Heading>
-                <Text variant="bodySmall" className={`text-neutral-400 font-normal pt-1 ${SecondaryTextClass}`}> {SecondaryText} </Text>
-                {buttonLabel && <Button label={buttonLabel} size="small" className="mt-6"/> }
-            </div>
+      className={`${backgroundColor} ${borderRadius} ${cardPadding}  w-fit min-w-[360px] shadow-card flex flex-col overflow-hidden`}
+      onClick={onClick}
+    >
+      {imgSrc && (
+        <div className="pb-6">
+          <Image
+            className={`w-full h-auto ${imgClass}`}
+            src={imgSrc}
+            width={imgWidth}
+            height={imgHeight}
+            alt={imgAlt}
+          />
         </div>
+      )}
+
+      <div className={`${iconSrc && "flex items-center space-x-4"}`}>
+        {iconSrc && (
+          <Image
+            src={iconSrc}
+            width={iconWidth}
+            height={iconHeight}
+            alt={iconAlt}
+          />
+        )}
+        <div className="">
+          {headingText && (
+            <Heading type="h6" className={`text-sm leading-6 font-bold`}>
+              {headingText}
+            </Heading>
+          )}
+          {secondaryText && (
+            <Text
+              variant="bodySmall"
+              className={`text-neutral-400 font-normal pt-1`}
+            >
+              {secondaryText}
+            </Text>
+          )}
+          {buttonLabel && (
+            <Button label={buttonLabel} size="small" className="mt-6" />
+          )}
+        </div>
+      </div>
     </a>
   );
 };
 
-export default Card;
+Card.defaultProps = {
+  className: "",
+  backgroundColor: "bg-white",
+  borderRadius: "rounded-md",
+  cardPadding: "p-4",
+  headingText: "",
+  secondaryText: "",
+  imgSrc: "",
+  imgWidth: 288,
+  imgHeight: 160,
+  imgClass: "cursor-pointer",
+  imgAlt: "Image Description",
+  buttonLabel: "",
+  iconSrc: "",
+  iconWidth: 44,
+  iconHeight: 44,
+  iconAlt: "",
+  onClick: () => {},
+};
 
 Card.propTypes = {
   className: PropTypes.string,
   backgroundColor: PropTypes.string,
   borderRadius: PropTypes.string,
   cardPadding: PropTypes.string,
-  variant: PropTypes.string,
-  HeadingText: PropTypes.string,
-  SecondaryText: PropTypes.string,
-  HeadingClass: PropTypes.string,
-  SecondaryTextClass: PropTypes.string,
+  headingText: PropTypes.string,
+  secondaryText: PropTypes.string,
+  imgSrc: PropTypes.string,
+  imgClass: PropTypes.string,
+  imgAlt: PropTypes.string,
   buttonLabel: PropTypes.string,
-  imgSmall: PropTypes.string,
+  iconSrc: PropTypes.string,
+  iconWidth: PropTypes.number,
+  iconHeight: PropTypes.number,
+  iconAlt: PropTypes.string,
+  onClick: PropTypes.func,
 };
+
+export default Card;

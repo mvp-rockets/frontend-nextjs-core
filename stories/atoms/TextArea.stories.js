@@ -1,25 +1,37 @@
-import React from "react";
 import TextArea from "../../atoms/TextArea";
 
 export default {
-  title: "Atoms/TextAreas",
+  title: "Atoms/TextArea",
   component: TextArea,
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["small", "default", "large"],
-    },
-  },
 };
 
 const Template = (args) => <TextArea {...args} />;
 
-export const TextAreas = Template.bind({});
-TextAreas.args = {
-  variant: "small",
+export const largeTextarea = Template.bind({});
+largeTextarea.args = {
   id: "name",
   name: "name",
   placeholder: "Placeholder",
   register: () => true,
+  fontSize: "text-base",
+  errorMessage: "Error Message"
+};
+
+export const defaultTextarea = Template.bind({});
+defaultTextarea.args = {
+  id: "name",
+  name: "name",
+  placeholder: "Placeholder",
+  register: () => true,
+  fontSize: "text-sm",
+  errorMessage: "Error Message"
+};
+export const smallTextarea = Template.bind({});
+smallTextarea.args = {
+  id: "name",
+  name: "name",
+  placeholder: "Placeholder",
+  register: () => true,
+  fontSize: "text-xs",
   errorMessage: "Error Message"
 };

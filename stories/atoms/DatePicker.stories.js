@@ -1,4 +1,3 @@
-import React from "react";
 import DatePicker from "../../atoms/DatePicker";
 
 export default {
