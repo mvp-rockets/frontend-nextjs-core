@@ -1,3 +1,5 @@
+import BaseTemplate from "@/templates/BaseTemplate";
+
 export default function Page({ params, searchParams }) {
-  return <h1>My Home Page</h1>
+  return <BaseTemplate />
 }

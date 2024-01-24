@@ -1,5 +1,5 @@
 import React from 'react';
-import BookSessionTemplate from '../../env/templates/BookSessionTemplate';
+import BookSessionTemplate from '../../templates/BookSessionTemplate';
 
 export default {
   title: 'templates/BookSessionTemplate',

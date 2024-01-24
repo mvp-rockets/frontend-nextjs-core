@@ -5,7 +5,8 @@
       "@/atoms/*": ["atoms/*"],
       "@/molecules/*": ["molecules/*"],
       "@/organisms/*": ["organisms/*"],
-      "@/services/*": ["services/*"]
+      "@/services/*": ["services/*"],
+      "@/templates/*" : ["templates/*"]
     }
   },
   "exclude": ["node_modules", ".next"]
