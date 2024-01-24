@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Navbar from "../molecules/Navbar";
-import Sidebar from "../molecules/Sidebar";
-import AddSession from "../organisms/AddSession";
+import Navbar from "../../molecules/Navbar";
+import Sidebar from "../../molecules/Sidebar";
+import AddSession from "../../organisms/AddSession";
 
 const BaseTemplate = ({
   logo,

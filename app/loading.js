@@ -1,4 +1,4 @@
-import SkeletonLoader from "src/atoms/Skeleton/SkeletonLoader"
+import SkeletonLoader from "atoms/Skeleton/SkeletonLoader"
 
 export default function Loading() {
   return <SkeletonLoader />

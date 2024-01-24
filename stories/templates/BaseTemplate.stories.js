@@ -1,5 +1,5 @@
 import React from "react";
-import BaseTemplate from "../../templates/BaseTemplate";
+import BaseTemplate from "../../env/templates/BaseTemplate";
 
 export default {
   title: "templates/BaseTemplate",

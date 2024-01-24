@@ -1,5 +1,5 @@
 import React from "react";
-import SchedulerTemplate from "../../templates/SchedulerTemplate";
+import SchedulerTemplate from "../../env/templates/SchedulerTemplate";
 
 export default {
   title: "templates/SchedulerTemplate",

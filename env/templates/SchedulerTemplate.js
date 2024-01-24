@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Navbar from "../molecules/Navbar";
-import Scheduler from "../molecules/Scheduler";
-import Sidebar from "../molecules/Sidebar";
+import Navbar from "../../molecules/Navbar";
+import Scheduler from "../../molecules/Scheduler";
+import Sidebar from "../../molecules/Sidebar";
 
 const SchedulerTemplate = ({
   logo,

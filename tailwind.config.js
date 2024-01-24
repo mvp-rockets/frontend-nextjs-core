@@ -1,5 +1,6 @@
 module.exports = {
   content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     "./src/**/*.{js,jsx,ts,tsx}",
     "./atoms/*.js",
     "./atoms/**/*.js",
@@ -88,14 +89,14 @@ module.exports = {
         black: "#0C0C1E",
       },
 
-      backgroundImage: {
-        rangeThumb: "url('public/images/icons/range-thumb.svg')",
-        checkMarkWhite: "url('public/images/icons/check-white.svg')",
-        checkMarkGray: "url('public/images/icons/check-gray.svg')",
-        sort: "url('public/images/icons/sort-icon.svg')",
-        ascSort: "url('public/images/icons/sort-icon.svg')",
-        dscSort: "url('public/images/icons/sort-icon.svg')",
-      },
+      // backgroundImage: {
+      //   rangeThumb: "url('public/images/icons/range-thumb.svg')",
+      //   checkMarkWhite: "url('public/images/icons/check-white.svg')",
+      //   checkMarkGray: "url('public/images/icons/check-gray.svg')",
+      //   sort: "url('public/images/icons/sort-icon.svg')",
+      //   ascSort: "url('public/images/icons/sort-icon.svg')",
+      //   dscSort: "url('public/images/icons/sort-icon.svg')",
+      // },
 
       margin: {
         10: "10%",
