@@ -3,9 +3,9 @@
 ### Introduction 
  It is a sample project for nextjs. which can be used as a based for new project
 ### Requirements 
-1. NVM: v0.38.0
-2. NPM: v8.13.2
-3. Nodejs: v16.15.1
+1. NVM: v0.39.7
+2. NPM: v9.0.0
+3. Nodejs: v20.11.0
 4. docker and docker-compose latest
 ### steps to start api
 1. After cloning update name, description and version with your project details in package.json

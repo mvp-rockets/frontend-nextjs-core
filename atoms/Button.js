@@ -1,3 +1,5 @@
+'use client'
+
 import classnames from "classnames";
 import Image from "next/image";
 import PropTypes from "prop-types";

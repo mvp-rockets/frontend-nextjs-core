@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/atoms/*": ["atoms/*"],
+      "@/molecules/*": ["molecules/*"],
+      "@/organisms/*": ["organisms/*"],
+      "@/services/*": ["services/*"],
+      "@/templates/*" : ["templates/*"]
     }
   },
   "exclude": ["node_modules", ".next"]

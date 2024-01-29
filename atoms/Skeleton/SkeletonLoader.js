@@ -234,7 +234,7 @@ const SkeletonTypes = {
 }
 
 const SkeletonLoader = (props) => {
-    const { type, length, ...rest } = props;
+    const { type = 'singleRow', length, ...rest } = props;
     return Array.from({ length }).map((_, index) => SkeletonTypes[type]({ index, ...rest }))
 };
 
