@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test": "NODE_ENV=test jest",
     "storybook": "storybook dev -p 6006",
-    "build:storybook": "storybook build"
+    "build:storybook": "storybook build",
+    "tailwind-config-viewer": "tailwind-config-viewer -o -p 8080"
   },
   "author": "Yashjeet Luthra <yash@napses.com>, Priyansh Jain <priyansh.jain@napses.com>",
   "license": "Napses",
@@ -78,6 +79,7 @@
     "postcss-loader": "^8.0.0",
     "storybook": "^7.6.10",
     "style-loader": "^3.3.4",
+    "tailwind-config-viewer": "^1.7.3",
     "tailwindcss": "^3.4.1"
   },
   "jest": {
