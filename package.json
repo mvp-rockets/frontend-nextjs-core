@@ -18,7 +18,7 @@
     "test": "NODE_ENV=test jest",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "tailwind-config-viewer": "tailwind-config-viewer -o -p 8080"
+    "tailwind-config-viewer": "tailwind-config-viewer -o -p 6007"
   },
   "author": "Yashjeet Luthra <yash@napses.com>, Priyansh Jain <priyansh.jain@napses.com>",
   "license": "Napses",
