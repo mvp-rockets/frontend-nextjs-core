@@ -6,7 +6,8 @@
       "@/molecules/*": ["molecules/*"],
       "@/organisms/*": ["organisms/*"],
       "@/services/*": ["services/*"],
-      "@/templates/*" : ["templates/*"]
+      "@/templates/*" : ["templates/*"],
+      "@/nextauth/*" : ["nextauth/*"]
     }
   },
   "exclude": ["node_modules", ".next"]
