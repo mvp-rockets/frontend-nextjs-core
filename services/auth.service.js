@@ -28,3 +28,7 @@ export const verifyLoginOtp = (data) => {
 export const sendLoginOtp = (data) => {
     return HttpService.postWithOutAuth(SEND_LOGIN_OTP_URL, data);
 };
+
+export const logoutSession = (data) => {
+    return HttpService.postWithAuth(SEND_LOGIN_OTP_URL, data);
+};

@@ -1,6 +1,7 @@
 import "styles/globals.css"
 import Provider from "./provider";
 import flagsmith from "flagsmith/isomorphic";
+import Navbar from "@/molecules/Navbar";
 
 export const metadata = {
   title: 'Next.js',
@@ -21,6 +22,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Provider flagsmithState={flagsmithState}>
+          <Navbar />
+
           {children}
         </Provider>
       </body>

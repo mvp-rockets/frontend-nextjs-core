@@ -5,7 +5,6 @@ import EmailProvider from "next-auth/providers/email"
 import CustomAdapter from '@/nextauth/custom-adapter';
 import { sendVerificationRequest } from '@/nextauth/utilities';
 import { loginWithUsername, verifyLoginOtp } from "@/services/auth.service";
-import CognitoProvider from "next-auth/providers/cognito";
 
 export const options = {
     adapter: CustomAdapter(),

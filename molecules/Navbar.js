@@ -1,8 +1,11 @@
+'use client'
+
 import React from "react";
 import PropTypes from "prop-types";
 import Logo from "../atoms/Logo";
 import MenuList from "../atoms/MenuList";
 import Button from "../atoms/Button";
+import { logoutSession } from "@/services/auth.service";
 
 const Navbar = ({
   className,
@@ -23,7 +26,9 @@ const Navbar = ({
 
       <div className="flex items-center space-x-10">
         <MenuList menuItem={menuItem} />
-        <Button label={buttonLabel} size="small" />
+        <Button onClick={() => {
+          logoutSession();
+        }} label={buttonLabel} size="small" />
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 import axios from "axios";
+import { getAuth } from "hooks/get-auth";
 
-export const postWithAuth = (url, entity, countryIsoCode) => {
-    const auth = 'getAuth()';
-    return postAuthWithAccessToken(url, auth?.accessToken, entity, countryIsoCode)
+export const postWithAuth = async (url, entity, countryIsoCode) => {
+  const { session } = await getAuth();
+
+    return postAuthWithAccessToken(url, session?.accessToken, entity, countryIsoCode)
 };
 
 export const putWithAuth = (url, entity) => {
