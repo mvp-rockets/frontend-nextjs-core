@@ -6,3 +6,6 @@ setupTests.js
 node_modules
 .next
 .git
+Dockerfile
+.dockerignore
+npm-debug.log

@@ -6,4 +6,5 @@ module.exports = {
         domains: ['s3.ap-south-1.amazonaws.com'],
     },
     productionBrowserSourceMaps: true,
+    output: 'standalone',
 }

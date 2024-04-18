@@ -1,54 +1,53 @@
 # Install dependencies only when needed
 FROM node:20.12.2 AS deps
-RUN apk add --no-cache g++ make py3-pip
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+
+USER node
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY ./package*.json ./
+COPY --chown=node:node package*.json /app
 
-RUN npm i --legacy-peer-deps  
+RUN npm install --legacy-peer-deps
 
 # Rebuild the source code only when needed
 FROM node:20.12.2 AS builder
 
+USER node
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY ./ .
-COPY ./env/.env.development .env.production
+COPY --chown=node:node . /app
+COPY --chown=node:node ./env /app/env
+COPY --chown=node:node --from=deps /app/package*.json /app
+COPY --chown=node:node --from=deps /app/node_modules /app/node_modules
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
+# This is required, otherwise next 14 fails in the next build step
+ENV NEXT_PRIVATE_STANDALONE true
 
-# RUN yarn build
-# If using npm comment out above and use below instead
-RUN npm run build
+RUN npm run build && npm prune --production
 
 # Production image, copy all the files and run next
-FROM node:20.12.2 AS runner
+FROM node:20.12.2-slim AS runner
+
+USER node
 WORKDIR /app
-
 ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_MANUAL_SIG_HANDLE true
+ENV PORT 3002
+ENV HOSTNAME "0.0.0.0"
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-
+COPY --chown=node:node --from=builder /app/next.config.js ./
+COPY --chown=node:node --from=builder /app/public /app/public
+COPY --chown=node:node --from=builder /app/package*.json /app
+COPY --chown=node:node --from=builder /app/env /app/env
+#COPY --from=builder --chown=node:node /app/.next ./.next
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
+COPY --from=builder --chown=node:node /app/.next/standalone ./
+COPY --from=builder --chown=node:node /app/.next/static /app/.next/static
 
 EXPOSE 3002
-
-ENV PORT 3002
-
 CMD ["node", "server.js"]
