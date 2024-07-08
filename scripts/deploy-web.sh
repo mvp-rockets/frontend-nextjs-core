@@ -18,7 +18,7 @@ npm ci --include=dev
 
 if [[ "$NODE_ENV" == "qa" ]]; then
     log "Building storybook"
-    npm run build:storybook
+    npm run build-storybook
     cp -r ./storybook-static ./public/storybook
 fi
 
