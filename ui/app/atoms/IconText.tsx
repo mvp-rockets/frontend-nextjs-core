@@ -12,6 +12,7 @@ interface IconTextProps {
   alt: string;
   label: string;
   className?: string;
+  iconPosition?: 'left' | 'right';
 }
 
 const IconText: React.FC<IconTextProps> = ({
@@ -24,13 +25,18 @@ const IconText: React.FC<IconTextProps> = ({
   alt,
   label,
   className = '',
-}) => (
-  <div className={`flex items-center gap-x-2 ${className}`}>
-    <Text variant={variant} textColor={textColor} fontWeight={fontWeight}>
-      {label}
-    </Text>
-    <NextImage src={iconSrc} width={iconWidth} height={iconHeight} alt={alt} />
-  </div>
-);
+  iconPosition = 'left',
+}) => {
+  const flexDirectionClass = iconPosition === 'right' ? 'flex-row-reverse' : '';
+
+  return (
+    <div className={`flex items-center gap-x-2 ${flexDirectionClass} ${className}`}>
+      <Text variant={variant} textColor={textColor} fontWeight={fontWeight}>
+        {label}
+      </Text>
+      <NextImage src={iconSrc} width={iconWidth} height={iconHeight} alt={alt} />
+    </div>
+  );
+};
 
 export default IconText;

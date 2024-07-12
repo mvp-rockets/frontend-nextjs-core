@@ -79,7 +79,6 @@ const Pagination: React.FC<PaginationProps> = ({
     } = _getAttributes(totalPages, selectedPage);
 
     const handlePageClick = (event: any) => {
-        // KeyboardEvent<HTMLSpanElement>
         const page = parseInt(event.currentTarget.dataset.page || '0', 10);
         setSelectedPage(page);
         onPageChange(page);
@@ -120,7 +119,7 @@ const Pagination: React.FC<PaginationProps> = ({
                             }}
                             className={`${normalState} ${!showPrev && 'opacity-50 pointer-events-none'}`}
                         >
-                            <Image src="/images/icons/angle-left.svg" alt="" width={24} height={24} />
+                            <Image src="/images/icons/angle-left.svg" alt="left arrow" width={24} height={24} />
                         </span>
                     </li>
 
@@ -209,7 +208,7 @@ const Pagination: React.FC<PaginationProps> = ({
                             }}
                             className={`${normalState} ${!showNext && 'opacity-50 pointer-events-none'}`}
                         >
-                            <Image src="/images/icons/angle-right.svg" alt="" width={24} height={24} />
+                            <Image src="/images/icons/angle-right.svg" alt="right arrow" width={24} height={24} />
                         </span>
                     </li>
                 </ul>

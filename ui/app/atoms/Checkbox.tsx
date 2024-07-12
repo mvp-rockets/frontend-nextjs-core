@@ -12,6 +12,7 @@ interface CheckboxProps {
   disabled?: boolean;
   register?: (name: string | undefined) => { [key: string]: any };
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  labelPosition?: 'left' | 'right';
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -25,13 +26,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
   disabled = false,
   register = () => ({}),
   onChange = () => {},
+  labelPosition = 'right',
   ...rest
 }) => {
-  let pointerClass = disabled ? 'pointer-events-none' : 'cursor-pointer';
+  const pointerClass = disabled ? 'pointer-events-none' : 'cursor-pointer';
+  const labelDirectionClass = labelPosition === 'left' ? 'flex-row-reverse' : '';
 
   return (
     <div className="flex flex-col w-fit">
-      <div className={`inline-flex items-center gap-x-2 ${className || ''}`}>
+      <div className={`flex items-center ${labelDirectionClass} gap-x-2 ${className || ''}`}>
         <label className={`relative flex items-center cursor-pointer ${pointerClass}`} htmlFor={id}>
           <input
             type="checkbox"
@@ -48,13 +51,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
               ${errorMessage ? 'border-error-100' : 'border-neutral-400 bg-basic-white'}
             `}
           />
-          <span
-            className="absolute text-basic-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100"
-          >
+          <span className="absolute text-basic-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
             <Image src={disabled ? '/images/icons/check-gray.svg' : '/images/icons/check.svg'} alt="check" width={12} height={12} />
           </span>
         </label>
-        <label className={`text-secondary-700 text-sm ${pointerClass}`} htmlFor={id}>
+        <label className={`text-secondary-700 text-sm select-none ${pointerClass}`} htmlFor={id}>
           {label}
         </label>
       </div>

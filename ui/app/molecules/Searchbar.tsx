@@ -39,7 +39,7 @@ const Searchbar: React.FC<SearchbarProps> = ({
                 disabled={disabled}
                 onChange={(e) => setValue(e.target.value)}
                 {...(register && { ...register(name) })}
-                className='border border-neutral-300 hover:border-neutral-600 focus:border-primary-90 py-3 pl-12 pr-4 rounded w-full h-full focus:outline-none'
+                className='border border-neutral-300 hover:border-neutral-600 focus:border-primary-900 py-3 pl-12 pr-4 rounded w-full h-full focus:outline-none'
             />
             {errorMessage && <span className="text-error-100 text-sm mt-2 block">{errorMessage}</span>}
         </div>

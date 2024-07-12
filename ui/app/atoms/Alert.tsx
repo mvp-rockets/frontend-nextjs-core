@@ -15,7 +15,6 @@ interface AlertProps {
 const Alert: React.FC<AlertProps> = ({
   variant,
   label,
-  className = '',
   width = 24,
   height = 24,
   alt = 'alert icon',
@@ -44,7 +43,7 @@ const Alert: React.FC<AlertProps> = ({
   };
 
   return (
-    <div className={alertStyles[variant]} aria-label={alt}>
+    <div className={alertStyles[variant]} role="alert">
       <NextImage src={alertIcons[variant]} alt={alt} width={width} height={height} />
       <Text variant="bodySmall" textColor={isLight ? undefined : 'text-basic-white'} className="text-inherit">
         {label}

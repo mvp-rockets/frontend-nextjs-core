@@ -11,7 +11,6 @@ import InputNumber from "./InputNumber";
 import Label from "./Label";
 import ProgressBar from "./ProgressBar";
 import RadioButton from "./RadioButton";
-import SubMenu from "./SubMenu";
 import Switch from "./Switch";
 import Textarea from "./Textarea";
 import IconText from "./IconText";
@@ -31,7 +30,6 @@ export {
     Label,
     ProgressBar,
     RadioButton,
-    SubMenu,
     Switch,
     IconText,
     Avatar,

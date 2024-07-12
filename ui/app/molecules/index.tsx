@@ -9,6 +9,8 @@ import Searchbar from "./Searchbar";
 import TimeLine from "./Timelines";
 import Datepicker from "./Datepicker";
 import Pagination from "./Pagination";
+import SubMenu from "./SubMenu";
+import Tooltip from "./Tooltip";
 
 export {
     AnimatedInputLabel,
@@ -22,4 +24,5 @@ export {
     TimeLine,
     Datepicker,
     Pagination,
+    Tooltip,
 }
