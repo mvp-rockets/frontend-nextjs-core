@@ -6,8 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "build:qa": "next build",
-    "start:qa": "next start -p 2002",
+    "build:env": "env-cmd -f ./env/.env.\"${npm_config_env}\" next build",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
